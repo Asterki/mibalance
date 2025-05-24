@@ -7,12 +7,12 @@ import type * as AuthAPITypes from "../../../../shared/types/api/auth";
 import LoggingService from "../../services/logging";
 
 const handler = async (
-  req: Request<{}, {}, AuthAPITypes.UpdateProfileRequestBody>,
-  res: Response<AuthAPITypes.UpdateProfileResponseData>,
+  req: Request<{}, {}, AuthAPITypes.UpdatePreferencesRequestBody>,
+  res: Response<AuthAPITypes.UpdatePreferencesResponseData>,
   _next: NextFunction,
 ) => {
   const account = req.user as IAccount;
-  const { name, avatarURL } = req.body;
+  const { theme, language } = req.body;
 
   try {
     const dbAccount = await AccountModel.findOne({
@@ -21,12 +21,11 @@ const handler = async (
     });
 
     // DB Account is always defined
-
-    if (name) {
-      dbAccount!.profile.name = name;
+    if (theme) {
+      dbAccount!.preferences.general.theme = theme;
     }
-    if (avatarURL) {
-      dbAccount!.profile.avatarUrl = avatarURL;
+    if (language) {
+      dbAccount!.preferences.general.language = language;
     }
 
     await dbAccount!.save();
