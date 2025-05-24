@@ -1,0 +1,9 @@
+.env
+node_modules
+logs
+uploads
+dist
+.env.dev
+.env.prod
+web-client-dist
+
