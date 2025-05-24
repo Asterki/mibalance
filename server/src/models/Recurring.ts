@@ -44,6 +44,8 @@ export interface IRecurringTransaction {
   }[];
 
   isPaused: boolean;
+  deleted: boolean;
+  deletedAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -99,6 +101,8 @@ const RecurringTransactionSchema = new Schema<IRecurringTransaction>(
     ],
 
     isPaused: { type: Boolean, default: false },
+    deleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
   },
   {
     timestamps: true,
@@ -109,7 +113,9 @@ const RecurringTransactionSchema = new Schema<IRecurringTransaction>(
 RecurringTransactionSchema.index({ account: 1, nextRun: 1 });
 RecurringTransactionSchema.index({ type: 1, frequency: 1 });
 
-export const RecurringTransaction = model<IRecurringTransaction>(
+const RecurringTransactionModel = model<IRecurringTransaction>(
   "RecurringTransaction",
   RecurringTransactionSchema,
 );
+
+export default RecurringTransactionModel;

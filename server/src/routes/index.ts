@@ -2,6 +2,8 @@ import type { Express } from "express";
 
 // Import the routers
 import AuthRouter from "./auth";
+import WalletRouter from "./wallets";
+import RecurringRouter from "./recurring";
 
 class Router {
   private instance: Router | null = null;
@@ -15,6 +17,8 @@ class Router {
 
   public registerRoutes = (server: Express) => {
     server.use("/api/auth", AuthRouter);
+    server.use("/api/wallet", WalletRouter);
+    server.use("/api/recurring", RecurringRouter);
   };
 }
 

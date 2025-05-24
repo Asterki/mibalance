@@ -46,7 +46,8 @@ const handler = async (
     );
 
     if (!updatedWallet) {
-      return res.status(404).send({ status: "not-found" });
+      res.status(404).send({ status: "not-found" });
+      return;
     }
 
     LoggingService.log({

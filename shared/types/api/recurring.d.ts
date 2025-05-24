@@ -38,7 +38,7 @@ export type CreateRequestBody = {
   isPaused?: boolean;
 };
 export type CreateResponseData = {
-  status: ResponseStatus;
+  status: ResponseStatus | "wallet-not-found";
   recurringTransaction?: IRecurringTransaction;
 };
 

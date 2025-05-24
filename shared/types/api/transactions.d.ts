@@ -40,7 +40,7 @@ export type CreateRequestBody = {
   }[];
 };
 export type CreateResponseData = {
-  status: ResponseStatus;
+  status: ResponseStatus | "wallet-not-found";
   transaction?: ITransaction;
 };
 

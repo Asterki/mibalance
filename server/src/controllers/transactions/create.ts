@@ -32,7 +32,17 @@ const handler = async (
       attachments,
     } = req.body;
 
-    const walletExists = 
+    const walletExists = await WalletModel.findOne({
+      _id: walletId,
+      account: account._id,
+      deleted: false,
+    });
+    if (!walletExists) {
+      res.status(404).json({
+        status: "wallet-not-found",
+      });
+      return; 
+    }
 
     // Construct the new transaction document
     const transaction = new TransactionModel({
