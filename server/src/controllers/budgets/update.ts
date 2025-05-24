@@ -64,7 +64,6 @@ const handler = async (
       details: {
         budgetId: budget._id.toString(),
         accountId: account._id.toString(),
-        updateData,
       },
     });
 
