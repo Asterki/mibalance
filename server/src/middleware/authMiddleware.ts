@@ -13,10 +13,4 @@ const ensureAuthenticated = (
   }
 };
 
-const ensurePermissions =
-  (permission: string[]) =>
-  (req: Request, res: Response, next: NextFunction) => {
-    next();
-  };
-
-export { ensureAuthenticated, ensurePermissions };
+export { ensureAuthenticated };
