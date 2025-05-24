@@ -22,6 +22,9 @@ export interface IBudget {
   notes?: string;
   tags?: string[];
 
+  deleted: boolean; // Soft delete
+  deletedAt?: Date; // Optional hard delete date
+
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -49,6 +52,9 @@ const BudgetSchema = new Schema<IBudget>(
 
     notes: { type: String },
     tags: [{ type: String }],
+
+    deleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
   },
   {
     timestamps: true,
@@ -58,4 +64,5 @@ const BudgetSchema = new Schema<IBudget>(
 // Useful indexes
 BudgetSchema.index({ account: 1, category: 1, period: 1, startDate: -1 });
 
-export const Budget = model<IBudget>("Budget", BudgetSchema);
+const BudgetModel = model<IBudget>("Budget", BudgetSchema);
+export default BudgetModel;
