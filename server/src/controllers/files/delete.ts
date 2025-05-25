@@ -3,10 +3,9 @@ import {
   DeleteRequestBody,
   DeleteResponseData,
 } from "../../../../shared/types/api/files";
-import { IAccount } from "../../models/Account";
-
 import FileModel from "../../models/File";
 import LoggingService from "../../services/logging";
+import { IAccount } from "../../models/Account";
 
 const deleteHandler = async (
   req: Request<{}, {}, DeleteRequestBody>,
@@ -22,7 +21,7 @@ const deleteHandler = async (
       { _id: fileId, isDeleted: false },
       {
         $set: {
-          isDeleted: true,
+          deleted: true,
           deletedAt: new Date(),
         },
       },

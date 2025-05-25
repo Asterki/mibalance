@@ -22,7 +22,7 @@ export interface IFile extends Document {
   tags?: string[];
 
   // Lifecycle
-  isDeleted: boolean;
+  deleted: boolean;
   deletedAt?: Date;
 
   // Timestamps
@@ -36,7 +36,6 @@ const fileSchema = new Schema<IFile>(
       type: Schema.Types.ObjectId,
       ref: "Account",
       required: true,
-      index: true,
     },
     sharedWith: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 
@@ -53,11 +52,11 @@ const fileSchema = new Schema<IFile>(
     hash: { type: String },
     version: { type: Number, default: 1 },
 
-    filePath: { type: String, required: true, index: true },
+    filePath: { type: String, required: true },
     description: { type: String },
     tags: [{ type: String }],
 
-    isDeleted: { type: Boolean, default: false },
+    deleted: { type: Boolean, default: false },
     deletedAt: { type: Date },
   },
   {

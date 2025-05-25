@@ -79,8 +79,6 @@ class Server {
     requiredEnv.forEach((key) => {
       if (!process.env[key]) {
         console.error(`[ENV ERROR] Missing variable: ${key}`);
-      } else {
-        console.log(`[ENV] ${key}: ${process.env[key]}`);
       }
     });
 
