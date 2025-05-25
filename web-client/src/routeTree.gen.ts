@@ -13,38 +13,16 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as IndexImport } from './routes/index'
-import { Route as ProfileIndexImport } from './routes/profile/index'
-import { Route as PosIndexImport } from './routes/pos/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as PosOpenSessionImport } from './routes/pos/open-session'
+import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as ErrorsOfflineImport } from './routes/errors/offline'
 import { Route as Errors404Import } from './routes/errors/404'
 import { Route as Errors403Import } from './routes/errors/403'
-import { Route as DashboardTransfersImport } from './routes/dashboard/transfers'
-import { Route as DashboardSuppliersImport } from './routes/dashboard/suppliers'
-import { Route as DashboardStoresImport } from './routes/dashboard/stores'
-import { Route as DashboardSmsEmailImport } from './routes/dashboard/sms-email'
-import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
-import { Route as DashboardSalesImport } from './routes/dashboard/sales'
-import { Route as DashboardReportsImport } from './routes/dashboard/reports'
-import { Route as DashboardQuotationsImport } from './routes/dashboard/quotations'
-import { Route as DashboardPurchasesImport } from './routes/dashboard/purchases'
-import { Route as DashboardNotificationsImport } from './routes/dashboard/notifications'
-import { Route as DashboardLogsImport } from './routes/dashboard/logs'
-import { Route as DashboardCostsImport } from './routes/dashboard/costs'
 import { Route as AuthVerifyEmailImport } from './routes/auth/verify-email'
 import { Route as AuthResetPasswordImport } from './routes/auth/reset-password'
+import { Route as AuthRegisterImport } from './routes/auth/register'
 import { Route as AuthLogoutImport } from './routes/auth/logout'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AuthForgotPasswordImport } from './routes/auth/forgot-password'
-import { Route as DashboardWarehousesIndexImport } from './routes/dashboard/warehouses/index'
-import { Route as DashboardProductsIndexImport } from './routes/dashboard/products/index'
-import { Route as DashboardAccountsIndexImport } from './routes/dashboard/accounts/index'
-import { Route as PosSalesRefundImport } from './routes/pos/sales/refund'
-import { Route as PosSalesNewImport } from './routes/pos/sales/new'
-import { Route as DashboardWarehousesStockImport } from './routes/dashboard/warehouses/stock'
-import { Route as DashboardProductsCategoriesImport } from './routes/dashboard/products/categories'
-import { Route as DashboardAccountsRolesImport } from './routes/dashboard/accounts/roles'
 
 // Create/Update Routes
 
@@ -60,27 +38,9 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProfileIndexRoute = ProfileIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ProfileRoute,
-} as any)
-
-const PosIndexRoute = PosIndexImport.update({
-  id: '/pos/',
-  path: '/pos/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardIndexRoute = DashboardIndexImport.update({
-  id: '/dashboard/',
-  path: '/dashboard/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PosOpenSessionRoute = PosOpenSessionImport.update({
-  id: '/pos/open-session',
-  path: '/pos/open-session',
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/home/',
+  path: '/home/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,78 +62,6 @@ const Errors403Route = Errors403Import.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardTransfersRoute = DashboardTransfersImport.update({
-  id: '/dashboard/transfers',
-  path: '/dashboard/transfers',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardSuppliersRoute = DashboardSuppliersImport.update({
-  id: '/dashboard/suppliers',
-  path: '/dashboard/suppliers',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardStoresRoute = DashboardStoresImport.update({
-  id: '/dashboard/stores',
-  path: '/dashboard/stores',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardSmsEmailRoute = DashboardSmsEmailImport.update({
-  id: '/dashboard/sms-email',
-  path: '/dashboard/sms-email',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardSettingsRoute = DashboardSettingsImport.update({
-  id: '/dashboard/settings',
-  path: '/dashboard/settings',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardSalesRoute = DashboardSalesImport.update({
-  id: '/dashboard/sales',
-  path: '/dashboard/sales',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardReportsRoute = DashboardReportsImport.update({
-  id: '/dashboard/reports',
-  path: '/dashboard/reports',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardQuotationsRoute = DashboardQuotationsImport.update({
-  id: '/dashboard/quotations',
-  path: '/dashboard/quotations',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardPurchasesRoute = DashboardPurchasesImport.update({
-  id: '/dashboard/purchases',
-  path: '/dashboard/purchases',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardNotificationsRoute = DashboardNotificationsImport.update({
-  id: '/dashboard/notifications',
-  path: '/dashboard/notifications',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardLogsRoute = DashboardLogsImport.update({
-  id: '/dashboard/logs',
-  path: '/dashboard/logs',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardCostsRoute = DashboardCostsImport.update({
-  id: '/dashboard/costs',
-  path: '/dashboard/costs',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const AuthVerifyEmailRoute = AuthVerifyEmailImport.update({
   id: '/auth/verify-email',
   path: '/auth/verify-email',
@@ -183,6 +71,12 @@ const AuthVerifyEmailRoute = AuthVerifyEmailImport.update({
 const AuthResetPasswordRoute = AuthResetPasswordImport.update({
   id: '/auth/reset-password',
   path: '/auth/reset-password',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRegisterRoute = AuthRegisterImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -201,55 +95,6 @@ const AuthLoginRoute = AuthLoginImport.update({
 const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
   id: '/auth/forgot-password',
   path: '/auth/forgot-password',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardWarehousesIndexRoute = DashboardWarehousesIndexImport.update({
-  id: '/dashboard/warehouses/',
-  path: '/dashboard/warehouses/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardProductsIndexRoute = DashboardProductsIndexImport.update({
-  id: '/dashboard/products/',
-  path: '/dashboard/products/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardAccountsIndexRoute = DashboardAccountsIndexImport.update({
-  id: '/dashboard/accounts/',
-  path: '/dashboard/accounts/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PosSalesRefundRoute = PosSalesRefundImport.update({
-  id: '/pos/sales/refund',
-  path: '/pos/sales/refund',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PosSalesNewRoute = PosSalesNewImport.update({
-  id: '/pos/sales/new',
-  path: '/pos/sales/new',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardWarehousesStockRoute = DashboardWarehousesStockImport.update({
-  id: '/dashboard/warehouses/stock',
-  path: '/dashboard/warehouses/stock',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardProductsCategoriesRoute =
-  DashboardProductsCategoriesImport.update({
-    id: '/dashboard/products/categories',
-    path: '/dashboard/products/categories',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const DashboardAccountsRolesRoute = DashboardAccountsRolesImport.update({
-  id: '/dashboard/accounts/roles',
-  path: '/dashboard/accounts/roles',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -292,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLogoutImport
       parentRoute: typeof rootRoute
     }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/reset-password': {
       id: '/auth/reset-password'
       path: '/auth/reset-password'
@@ -304,90 +156,6 @@ declare module '@tanstack/react-router' {
       path: '/auth/verify-email'
       fullPath: '/auth/verify-email'
       preLoaderRoute: typeof AuthVerifyEmailImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/costs': {
-      id: '/dashboard/costs'
-      path: '/dashboard/costs'
-      fullPath: '/dashboard/costs'
-      preLoaderRoute: typeof DashboardCostsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/logs': {
-      id: '/dashboard/logs'
-      path: '/dashboard/logs'
-      fullPath: '/dashboard/logs'
-      preLoaderRoute: typeof DashboardLogsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/notifications': {
-      id: '/dashboard/notifications'
-      path: '/dashboard/notifications'
-      fullPath: '/dashboard/notifications'
-      preLoaderRoute: typeof DashboardNotificationsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/purchases': {
-      id: '/dashboard/purchases'
-      path: '/dashboard/purchases'
-      fullPath: '/dashboard/purchases'
-      preLoaderRoute: typeof DashboardPurchasesImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/quotations': {
-      id: '/dashboard/quotations'
-      path: '/dashboard/quotations'
-      fullPath: '/dashboard/quotations'
-      preLoaderRoute: typeof DashboardQuotationsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/reports': {
-      id: '/dashboard/reports'
-      path: '/dashboard/reports'
-      fullPath: '/dashboard/reports'
-      preLoaderRoute: typeof DashboardReportsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/sales': {
-      id: '/dashboard/sales'
-      path: '/dashboard/sales'
-      fullPath: '/dashboard/sales'
-      preLoaderRoute: typeof DashboardSalesImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/settings': {
-      id: '/dashboard/settings'
-      path: '/dashboard/settings'
-      fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/sms-email': {
-      id: '/dashboard/sms-email'
-      path: '/dashboard/sms-email'
-      fullPath: '/dashboard/sms-email'
-      preLoaderRoute: typeof DashboardSmsEmailImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/stores': {
-      id: '/dashboard/stores'
-      path: '/dashboard/stores'
-      fullPath: '/dashboard/stores'
-      preLoaderRoute: typeof DashboardStoresImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/suppliers': {
-      id: '/dashboard/suppliers'
-      path: '/dashboard/suppliers'
-      fullPath: '/dashboard/suppliers'
-      preLoaderRoute: typeof DashboardSuppliersImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/transfers': {
-      id: '/dashboard/transfers'
-      path: '/dashboard/transfers'
-      fullPath: '/dashboard/transfers'
-      preLoaderRoute: typeof DashboardTransfersImport
       parentRoute: typeof rootRoute
     }
     '/errors/403': {
@@ -411,88 +179,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ErrorsOfflineImport
       parentRoute: typeof rootRoute
     }
-    '/pos/open-session': {
-      id: '/pos/open-session'
-      path: '/pos/open-session'
-      fullPath: '/pos/open-session'
-      preLoaderRoute: typeof PosOpenSessionImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/pos/': {
-      id: '/pos/'
-      path: '/pos'
-      fullPath: '/pos'
-      preLoaderRoute: typeof PosIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile/': {
-      id: '/profile/'
-      path: '/'
-      fullPath: '/profile/'
-      preLoaderRoute: typeof ProfileIndexImport
-      parentRoute: typeof ProfileImport
-    }
-    '/dashboard/accounts/roles': {
-      id: '/dashboard/accounts/roles'
-      path: '/dashboard/accounts/roles'
-      fullPath: '/dashboard/accounts/roles'
-      preLoaderRoute: typeof DashboardAccountsRolesImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/products/categories': {
-      id: '/dashboard/products/categories'
-      path: '/dashboard/products/categories'
-      fullPath: '/dashboard/products/categories'
-      preLoaderRoute: typeof DashboardProductsCategoriesImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/warehouses/stock': {
-      id: '/dashboard/warehouses/stock'
-      path: '/dashboard/warehouses/stock'
-      fullPath: '/dashboard/warehouses/stock'
-      preLoaderRoute: typeof DashboardWarehousesStockImport
-      parentRoute: typeof rootRoute
-    }
-    '/pos/sales/new': {
-      id: '/pos/sales/new'
-      path: '/pos/sales/new'
-      fullPath: '/pos/sales/new'
-      preLoaderRoute: typeof PosSalesNewImport
-      parentRoute: typeof rootRoute
-    }
-    '/pos/sales/refund': {
-      id: '/pos/sales/refund'
-      path: '/pos/sales/refund'
-      fullPath: '/pos/sales/refund'
-      preLoaderRoute: typeof PosSalesRefundImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/accounts/': {
-      id: '/dashboard/accounts/'
-      path: '/dashboard/accounts'
-      fullPath: '/dashboard/accounts'
-      preLoaderRoute: typeof DashboardAccountsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/products/': {
-      id: '/dashboard/products/'
-      path: '/dashboard/products'
-      fullPath: '/dashboard/products'
-      preLoaderRoute: typeof DashboardProductsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/warehouses/': {
-      id: '/dashboard/warehouses/'
-      path: '/dashboard/warehouses'
-      fullPath: '/dashboard/warehouses'
-      preLoaderRoute: typeof DashboardWarehousesIndexImport
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -500,126 +191,50 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface ProfileRouteChildren {
-  ProfileIndexRoute: typeof ProfileIndexRoute
-}
-
-const ProfileRouteChildren: ProfileRouteChildren = {
-  ProfileIndexRoute: ProfileIndexRoute,
-}
-
-const ProfileRouteWithChildren =
-  ProfileRoute._addFileChildren(ProfileRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/dashboard/costs': typeof DashboardCostsRoute
-  '/dashboard/logs': typeof DashboardLogsRoute
-  '/dashboard/notifications': typeof DashboardNotificationsRoute
-  '/dashboard/purchases': typeof DashboardPurchasesRoute
-  '/dashboard/quotations': typeof DashboardQuotationsRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
-  '/dashboard/sales': typeof DashboardSalesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/sms-email': typeof DashboardSmsEmailRoute
-  '/dashboard/stores': typeof DashboardStoresRoute
-  '/dashboard/suppliers': typeof DashboardSuppliersRoute
-  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
-  '/pos/open-session': typeof PosOpenSessionRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/pos': typeof PosIndexRoute
-  '/profile/': typeof ProfileIndexRoute
-  '/dashboard/accounts/roles': typeof DashboardAccountsRolesRoute
-  '/dashboard/products/categories': typeof DashboardProductsCategoriesRoute
-  '/dashboard/warehouses/stock': typeof DashboardWarehousesStockRoute
-  '/pos/sales/new': typeof PosSalesNewRoute
-  '/pos/sales/refund': typeof PosSalesRefundRoute
-  '/dashboard/accounts': typeof DashboardAccountsIndexRoute
-  '/dashboard/products': typeof DashboardProductsIndexRoute
-  '/dashboard/warehouses': typeof DashboardWarehousesIndexRoute
+  '/home': typeof HomeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/dashboard/costs': typeof DashboardCostsRoute
-  '/dashboard/logs': typeof DashboardLogsRoute
-  '/dashboard/notifications': typeof DashboardNotificationsRoute
-  '/dashboard/purchases': typeof DashboardPurchasesRoute
-  '/dashboard/quotations': typeof DashboardQuotationsRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
-  '/dashboard/sales': typeof DashboardSalesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/sms-email': typeof DashboardSmsEmailRoute
-  '/dashboard/stores': typeof DashboardStoresRoute
-  '/dashboard/suppliers': typeof DashboardSuppliersRoute
-  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
-  '/pos/open-session': typeof PosOpenSessionRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/pos': typeof PosIndexRoute
-  '/profile': typeof ProfileIndexRoute
-  '/dashboard/accounts/roles': typeof DashboardAccountsRolesRoute
-  '/dashboard/products/categories': typeof DashboardProductsCategoriesRoute
-  '/dashboard/warehouses/stock': typeof DashboardWarehousesStockRoute
-  '/pos/sales/new': typeof PosSalesNewRoute
-  '/pos/sales/refund': typeof PosSalesRefundRoute
-  '/dashboard/accounts': typeof DashboardAccountsIndexRoute
-  '/dashboard/products': typeof DashboardProductsIndexRoute
-  '/dashboard/warehouses': typeof DashboardWarehousesIndexRoute
+  '/home': typeof HomeIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/dashboard/costs': typeof DashboardCostsRoute
-  '/dashboard/logs': typeof DashboardLogsRoute
-  '/dashboard/notifications': typeof DashboardNotificationsRoute
-  '/dashboard/purchases': typeof DashboardPurchasesRoute
-  '/dashboard/quotations': typeof DashboardQuotationsRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
-  '/dashboard/sales': typeof DashboardSalesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/sms-email': typeof DashboardSmsEmailRoute
-  '/dashboard/stores': typeof DashboardStoresRoute
-  '/dashboard/suppliers': typeof DashboardSuppliersRoute
-  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
-  '/pos/open-session': typeof PosOpenSessionRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/pos/': typeof PosIndexRoute
-  '/profile/': typeof ProfileIndexRoute
-  '/dashboard/accounts/roles': typeof DashboardAccountsRolesRoute
-  '/dashboard/products/categories': typeof DashboardProductsCategoriesRoute
-  '/dashboard/warehouses/stock': typeof DashboardWarehousesStockRoute
-  '/pos/sales/new': typeof PosSalesNewRoute
-  '/pos/sales/refund': typeof PosSalesRefundRoute
-  '/dashboard/accounts/': typeof DashboardAccountsIndexRoute
-  '/dashboard/products/': typeof DashboardProductsIndexRoute
-  '/dashboard/warehouses/': typeof DashboardWarehousesIndexRoute
+  '/home/': typeof HomeIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -630,70 +245,27 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
+    | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
-    | '/dashboard/costs'
-    | '/dashboard/logs'
-    | '/dashboard/notifications'
-    | '/dashboard/purchases'
-    | '/dashboard/quotations'
-    | '/dashboard/reports'
-    | '/dashboard/sales'
-    | '/dashboard/settings'
-    | '/dashboard/sms-email'
-    | '/dashboard/stores'
-    | '/dashboard/suppliers'
-    | '/dashboard/transfers'
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
-    | '/pos/open-session'
-    | '/dashboard'
-    | '/pos'
-    | '/profile/'
-    | '/dashboard/accounts/roles'
-    | '/dashboard/products/categories'
-    | '/dashboard/warehouses/stock'
-    | '/pos/sales/new'
-    | '/pos/sales/refund'
-    | '/dashboard/accounts'
-    | '/dashboard/products'
-    | '/dashboard/warehouses'
+    | '/home'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/profile'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
+    | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
-    | '/dashboard/costs'
-    | '/dashboard/logs'
-    | '/dashboard/notifications'
-    | '/dashboard/purchases'
-    | '/dashboard/quotations'
-    | '/dashboard/reports'
-    | '/dashboard/sales'
-    | '/dashboard/settings'
-    | '/dashboard/sms-email'
-    | '/dashboard/stores'
-    | '/dashboard/suppliers'
-    | '/dashboard/transfers'
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
-    | '/pos/open-session'
-    | '/dashboard'
-    | '/pos'
-    | '/profile'
-    | '/dashboard/accounts/roles'
-    | '/dashboard/products/categories'
-    | '/dashboard/warehouses/stock'
-    | '/pos/sales/new'
-    | '/pos/sales/refund'
-    | '/dashboard/accounts'
-    | '/dashboard/products'
-    | '/dashboard/warehouses'
+    | '/home'
   id:
     | '__root__'
     | '/'
@@ -701,108 +273,44 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
+    | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
-    | '/dashboard/costs'
-    | '/dashboard/logs'
-    | '/dashboard/notifications'
-    | '/dashboard/purchases'
-    | '/dashboard/quotations'
-    | '/dashboard/reports'
-    | '/dashboard/sales'
-    | '/dashboard/settings'
-    | '/dashboard/sms-email'
-    | '/dashboard/stores'
-    | '/dashboard/suppliers'
-    | '/dashboard/transfers'
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
-    | '/pos/open-session'
-    | '/dashboard/'
-    | '/pos/'
-    | '/profile/'
-    | '/dashboard/accounts/roles'
-    | '/dashboard/products/categories'
-    | '/dashboard/warehouses/stock'
-    | '/pos/sales/new'
-    | '/pos/sales/refund'
-    | '/dashboard/accounts/'
-    | '/dashboard/products/'
-    | '/dashboard/warehouses/'
+    | '/home/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProfileRoute: typeof ProfileRouteWithChildren
+  ProfileRoute: typeof ProfileRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthLogoutRoute: typeof AuthLogoutRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
-  DashboardCostsRoute: typeof DashboardCostsRoute
-  DashboardLogsRoute: typeof DashboardLogsRoute
-  DashboardNotificationsRoute: typeof DashboardNotificationsRoute
-  DashboardPurchasesRoute: typeof DashboardPurchasesRoute
-  DashboardQuotationsRoute: typeof DashboardQuotationsRoute
-  DashboardReportsRoute: typeof DashboardReportsRoute
-  DashboardSalesRoute: typeof DashboardSalesRoute
-  DashboardSettingsRoute: typeof DashboardSettingsRoute
-  DashboardSmsEmailRoute: typeof DashboardSmsEmailRoute
-  DashboardStoresRoute: typeof DashboardStoresRoute
-  DashboardSuppliersRoute: typeof DashboardSuppliersRoute
-  DashboardTransfersRoute: typeof DashboardTransfersRoute
   Errors403Route: typeof Errors403Route
   Errors404Route: typeof Errors404Route
   ErrorsOfflineRoute: typeof ErrorsOfflineRoute
-  PosOpenSessionRoute: typeof PosOpenSessionRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  PosIndexRoute: typeof PosIndexRoute
-  DashboardAccountsRolesRoute: typeof DashboardAccountsRolesRoute
-  DashboardProductsCategoriesRoute: typeof DashboardProductsCategoriesRoute
-  DashboardWarehousesStockRoute: typeof DashboardWarehousesStockRoute
-  PosSalesNewRoute: typeof PosSalesNewRoute
-  PosSalesRefundRoute: typeof PosSalesRefundRoute
-  DashboardAccountsIndexRoute: typeof DashboardAccountsIndexRoute
-  DashboardProductsIndexRoute: typeof DashboardProductsIndexRoute
-  DashboardWarehousesIndexRoute: typeof DashboardWarehousesIndexRoute
+  HomeIndexRoute: typeof HomeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProfileRoute: ProfileRouteWithChildren,
+  ProfileRoute: ProfileRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthLogoutRoute: AuthLogoutRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
-  DashboardCostsRoute: DashboardCostsRoute,
-  DashboardLogsRoute: DashboardLogsRoute,
-  DashboardNotificationsRoute: DashboardNotificationsRoute,
-  DashboardPurchasesRoute: DashboardPurchasesRoute,
-  DashboardQuotationsRoute: DashboardQuotationsRoute,
-  DashboardReportsRoute: DashboardReportsRoute,
-  DashboardSalesRoute: DashboardSalesRoute,
-  DashboardSettingsRoute: DashboardSettingsRoute,
-  DashboardSmsEmailRoute: DashboardSmsEmailRoute,
-  DashboardStoresRoute: DashboardStoresRoute,
-  DashboardSuppliersRoute: DashboardSuppliersRoute,
-  DashboardTransfersRoute: DashboardTransfersRoute,
   Errors403Route: Errors403Route,
   Errors404Route: Errors404Route,
   ErrorsOfflineRoute: ErrorsOfflineRoute,
-  PosOpenSessionRoute: PosOpenSessionRoute,
-  DashboardIndexRoute: DashboardIndexRoute,
-  PosIndexRoute: PosIndexRoute,
-  DashboardAccountsRolesRoute: DashboardAccountsRolesRoute,
-  DashboardProductsCategoriesRoute: DashboardProductsCategoriesRoute,
-  DashboardWarehousesStockRoute: DashboardWarehousesStockRoute,
-  PosSalesNewRoute: PosSalesNewRoute,
-  PosSalesRefundRoute: PosSalesRefundRoute,
-  DashboardAccountsIndexRoute: DashboardAccountsIndexRoute,
-  DashboardProductsIndexRoute: DashboardProductsIndexRoute,
-  DashboardWarehousesIndexRoute: DashboardWarehousesIndexRoute,
+  HomeIndexRoute: HomeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -820,44 +328,20 @@ export const routeTree = rootRoute
         "/auth/forgot-password",
         "/auth/login",
         "/auth/logout",
+        "/auth/register",
         "/auth/reset-password",
         "/auth/verify-email",
-        "/dashboard/costs",
-        "/dashboard/logs",
-        "/dashboard/notifications",
-        "/dashboard/purchases",
-        "/dashboard/quotations",
-        "/dashboard/reports",
-        "/dashboard/sales",
-        "/dashboard/settings",
-        "/dashboard/sms-email",
-        "/dashboard/stores",
-        "/dashboard/suppliers",
-        "/dashboard/transfers",
         "/errors/403",
         "/errors/404",
         "/errors/offline",
-        "/pos/open-session",
-        "/dashboard/",
-        "/pos/",
-        "/dashboard/accounts/roles",
-        "/dashboard/products/categories",
-        "/dashboard/warehouses/stock",
-        "/pos/sales/new",
-        "/pos/sales/refund",
-        "/dashboard/accounts/",
-        "/dashboard/products/",
-        "/dashboard/warehouses/"
+        "/home/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
     "/profile": {
-      "filePath": "profile.tsx",
-      "children": [
-        "/profile/"
-      ]
+      "filePath": "profile.tsx"
     },
     "/auth/forgot-password": {
       "filePath": "auth/forgot-password.tsx"
@@ -868,47 +352,14 @@ export const routeTree = rootRoute
     "/auth/logout": {
       "filePath": "auth/logout.tsx"
     },
+    "/auth/register": {
+      "filePath": "auth/register.tsx"
+    },
     "/auth/reset-password": {
       "filePath": "auth/reset-password.tsx"
     },
     "/auth/verify-email": {
       "filePath": "auth/verify-email.tsx"
-    },
-    "/dashboard/costs": {
-      "filePath": "dashboard/costs.tsx"
-    },
-    "/dashboard/logs": {
-      "filePath": "dashboard/logs.tsx"
-    },
-    "/dashboard/notifications": {
-      "filePath": "dashboard/notifications.tsx"
-    },
-    "/dashboard/purchases": {
-      "filePath": "dashboard/purchases.tsx"
-    },
-    "/dashboard/quotations": {
-      "filePath": "dashboard/quotations.tsx"
-    },
-    "/dashboard/reports": {
-      "filePath": "dashboard/reports.tsx"
-    },
-    "/dashboard/sales": {
-      "filePath": "dashboard/sales.tsx"
-    },
-    "/dashboard/settings": {
-      "filePath": "dashboard/settings.tsx"
-    },
-    "/dashboard/sms-email": {
-      "filePath": "dashboard/sms-email.tsx"
-    },
-    "/dashboard/stores": {
-      "filePath": "dashboard/stores.tsx"
-    },
-    "/dashboard/suppliers": {
-      "filePath": "dashboard/suppliers.tsx"
-    },
-    "/dashboard/transfers": {
-      "filePath": "dashboard/transfers.tsx"
     },
     "/errors/403": {
       "filePath": "errors/403.tsx"
@@ -919,42 +370,8 @@ export const routeTree = rootRoute
     "/errors/offline": {
       "filePath": "errors/offline.tsx"
     },
-    "/pos/open-session": {
-      "filePath": "pos/open-session.tsx"
-    },
-    "/dashboard/": {
-      "filePath": "dashboard/index.tsx"
-    },
-    "/pos/": {
-      "filePath": "pos/index.tsx"
-    },
-    "/profile/": {
-      "filePath": "profile/index.tsx",
-      "parent": "/profile"
-    },
-    "/dashboard/accounts/roles": {
-      "filePath": "dashboard/accounts/roles.tsx"
-    },
-    "/dashboard/products/categories": {
-      "filePath": "dashboard/products/categories.tsx"
-    },
-    "/dashboard/warehouses/stock": {
-      "filePath": "dashboard/warehouses/stock.tsx"
-    },
-    "/pos/sales/new": {
-      "filePath": "pos/sales/new.tsx"
-    },
-    "/pos/sales/refund": {
-      "filePath": "pos/sales/refund.tsx"
-    },
-    "/dashboard/accounts/": {
-      "filePath": "dashboard/accounts/index.tsx"
-    },
-    "/dashboard/products/": {
-      "filePath": "dashboard/products/index.tsx"
-    },
-    "/dashboard/warehouses/": {
-      "filePath": "dashboard/warehouses/index.tsx"
+    "/home/": {
+      "filePath": "home/index.tsx"
     }
   }
 }

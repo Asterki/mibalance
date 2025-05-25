@@ -9,7 +9,6 @@ class MongoDBClient {
   private retryDelayMs: number = 3000;
 
   constructor(connectionString: string, options: ConnectOptions = {}) {
-    console.log(connectionString);
     this.connectionString = connectionString;
     this.options = options;
     this.bindEvents();
