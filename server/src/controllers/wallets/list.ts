@@ -13,12 +13,15 @@ const handler = async (
 ) => {
   try {
     const account = req.user as IAccount;
-    const { page, count, fields, filters, search } = req.body;
+    const { page, count, fields, filters, search, includeDeleted } = req.body;
 
     const query: any = {
       account: account._id,
-      deleted: false,
     };
+
+    if (typeof includeDeleted == "boolean" && includeDeleted == false) {
+      query.deleted = false;
+    }
 
     // --- Filters ---
     if (filters) {
@@ -26,8 +29,6 @@ const handler = async (
       if (filters.currency) query.currency = filters.currency;
       if (typeof filters.isPrimary === "boolean")
         query.isPrimary = filters.isPrimary;
-      if (typeof filters.archived === "boolean")
-        query.deleted = filters.archived;
     }
 
     // --- Search ---

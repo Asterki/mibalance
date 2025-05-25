@@ -19,6 +19,7 @@
     "antd": "^5.24.0",
     "antd-img-crop": "^4.24.0",
     "axios": "^1.7.9",
+    "currency-codes": "^2.2.0",
     "i18next": "^24.2.0",
     "jsbarcode": "^3.11.6",
     "jspdf": "^3.0.1",

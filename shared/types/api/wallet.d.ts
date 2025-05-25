@@ -65,12 +65,12 @@ export type ListRequestBody = {
     type?: IWallet["type"];
     currency?: string;
     isPrimary?: boolean;
-    archived?: boolean;
   };
   search?: {
     query: string;
     searchIn: Array<"name" | "description" | "institution">;
   };
+  includeDeleted?: boolean;
 };
 
 export type ListResponseData = {

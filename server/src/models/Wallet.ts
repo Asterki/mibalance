@@ -2,6 +2,7 @@ import { Schema, model, Types } from "mongoose";
 import { IAccount } from "./Account";
 
 export interface IWallet {
+  _id: Types.ObjectId;
   account: Types.ObjectId | IAccount; // Owner of the wallet
   name: string;
   description?: string;

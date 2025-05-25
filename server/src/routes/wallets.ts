@@ -91,6 +91,7 @@ router.post(
             "archived",
             "createdAt",
             "updatedAt",
+            "deleted",
           ]),
         )
         .optional(),
@@ -122,6 +123,7 @@ router.post(
             "archived",
             "createdAt",
             "updatedAt",
+            "deleted",
           ]),
         )
         .optional(),

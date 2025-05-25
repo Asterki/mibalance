@@ -19,7 +19,7 @@ class Router {
 
   public registerRoutes = (server: Express) => {
     server.use("/api/auth", AuthRouter);
-    server.use("/api/wallet", WalletRouter);
+    server.use("/api/wallets", WalletRouter);
     server.use("/api/recurring", RecurringRouter);
     server.use("/api/budgets", BudgetsRouter);
     server.use("/api/files", FilesRouter);

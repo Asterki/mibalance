@@ -222,6 +222,78 @@ const translation = {
       showCount: "{{count}} por página",
       page: "Página {{page}}",
     },
+
+    wallets: {
+      page: {
+        title: "Carteras",
+        description:
+          "Aquí puedes ver y administrar todas tus cuentas y carteras. Puedes agregar, editar o eliminar cuentas según sea necesario.",
+        createWallet: "Crear nueva cartera",
+      },
+
+      table: {
+        "total": "{{range}} de {{total}} billeteras",
+        "name": "Nombre",
+        "description": "Descripción",
+        "balance": "Saldo",
+        "currency": "Moneda",
+        "type": "Tipo",
+        "institution": "Institución",
+        "color": "Color",
+        "icon": "Ícono",
+        "isPrimary": "Principal",
+        "actions": "Acciones",
+        "deleted": "Eliminado",
+        "editTooltip": "Editar billetera",
+        "deleteTooltip": "Eliminar billetera"
+      },
+
+      modals: {
+        create: {
+          title: "Crear nueva billetera",
+          ok: "Crear",
+          cancel: "Cancelar",
+          name: "Nombre",
+          description: "Descripción",
+          balance: "Saldo inicial",
+          currency: "Moneda (código ISO 4217)",
+          type: "Tipo de billetera",
+          "type.cash": "Efectivo",
+          "type.bank": "Banco",
+          "type.credit": "Crédito",
+          "type.investment": "Inversión",
+          "type.other": "Otro",
+          institution: "Institución financiera",
+          isPrimary: "Billetera principal",
+          color: "Color",
+          "color-placeholder": "Ejemplo: #FF5733 o rojo",
+          icon: "Ícono",
+          "icon-placeholder": "Nombre del ícono o URL",
+
+          messages: {
+            "name-too-short": "El nombre de la cartera es obligatorio.",
+            "name-too-long":
+              "El nombre de la cartera no puede exceder los 100 caracteres.",
+            "description-too-long":
+              "La descripción de la cartera no puede exceder los 500 caracteres.",
+            "balance-negative":
+              "El saldo inicial no puede ser un valor negativo.",
+            "currency-required": "Debe especificar una moneda para la cartera.",
+            "currency-invalid-length":
+              "El código de moneda debe tener exactamente 3 caracteres según la norma ISO 4217.",
+            "type-invalid": "El tipo de cartera especificado no es válido.",
+            "type-required": "Debe seleccionar un tipo de cartera.",
+            "institution-too-long":
+              "El nombre de la institución no puede exceder los 100 caracteres.",
+            "color-too-long":
+              "El valor del color no puede exceder los 16 caracteres.",
+            "icon-too-long":
+              "El identificador del icono no puede exceder los 64 caracteres.",
+            success: "Cartera creada con éxito",
+          },
+        },
+      },
+    },
   },
 };
 
