@@ -14,6 +14,11 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
+import { Route as HomeWalletsImport } from './routes/home/wallets'
+import { Route as HomeTransactionsImport } from './routes/home/transactions'
+import { Route as HomeSettingsImport } from './routes/home/settings'
+import { Route as HomeProfileImport } from './routes/home/profile'
+import { Route as HomeBudgetsImport } from './routes/home/budgets'
 import { Route as ErrorsOfflineImport } from './routes/errors/offline'
 import { Route as Errors404Import } from './routes/errors/404'
 import { Route as Errors403Import } from './routes/errors/403'
@@ -41,6 +46,36 @@ const IndexRoute = IndexImport.update({
 const HomeIndexRoute = HomeIndexImport.update({
   id: '/home/',
   path: '/home/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeWalletsRoute = HomeWalletsImport.update({
+  id: '/home/wallets',
+  path: '/home/wallets',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeTransactionsRoute = HomeTransactionsImport.update({
+  id: '/home/transactions',
+  path: '/home/transactions',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeSettingsRoute = HomeSettingsImport.update({
+  id: '/home/settings',
+  path: '/home/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeProfileRoute = HomeProfileImport.update({
+  id: '/home/profile',
+  path: '/home/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeBudgetsRoute = HomeBudgetsImport.update({
+  id: '/home/budgets',
+  path: '/home/budgets',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -179,6 +214,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ErrorsOfflineImport
       parentRoute: typeof rootRoute
     }
+    '/home/budgets': {
+      id: '/home/budgets'
+      path: '/home/budgets'
+      fullPath: '/home/budgets'
+      preLoaderRoute: typeof HomeBudgetsImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/profile': {
+      id: '/home/profile'
+      path: '/home/profile'
+      fullPath: '/home/profile'
+      preLoaderRoute: typeof HomeProfileImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/settings': {
+      id: '/home/settings'
+      path: '/home/settings'
+      fullPath: '/home/settings'
+      preLoaderRoute: typeof HomeSettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/transactions': {
+      id: '/home/transactions'
+      path: '/home/transactions'
+      fullPath: '/home/transactions'
+      preLoaderRoute: typeof HomeTransactionsImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/wallets': {
+      id: '/home/wallets'
+      path: '/home/wallets'
+      fullPath: '/home/wallets'
+      preLoaderRoute: typeof HomeWalletsImport
+      parentRoute: typeof rootRoute
+    }
     '/home/': {
       id: '/home/'
       path: '/home'
@@ -203,6 +273,11 @@ export interface FileRoutesByFullPath {
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
+  '/home/budgets': typeof HomeBudgetsRoute
+  '/home/profile': typeof HomeProfileRoute
+  '/home/settings': typeof HomeSettingsRoute
+  '/home/transactions': typeof HomeTransactionsRoute
+  '/home/wallets': typeof HomeWalletsRoute
   '/home': typeof HomeIndexRoute
 }
 
@@ -218,6 +293,11 @@ export interface FileRoutesByTo {
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
+  '/home/budgets': typeof HomeBudgetsRoute
+  '/home/profile': typeof HomeProfileRoute
+  '/home/settings': typeof HomeSettingsRoute
+  '/home/transactions': typeof HomeTransactionsRoute
+  '/home/wallets': typeof HomeWalletsRoute
   '/home': typeof HomeIndexRoute
 }
 
@@ -234,6 +314,11 @@ export interface FileRoutesById {
   '/errors/403': typeof Errors403Route
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
+  '/home/budgets': typeof HomeBudgetsRoute
+  '/home/profile': typeof HomeProfileRoute
+  '/home/settings': typeof HomeSettingsRoute
+  '/home/transactions': typeof HomeTransactionsRoute
+  '/home/wallets': typeof HomeWalletsRoute
   '/home/': typeof HomeIndexRoute
 }
 
@@ -251,6 +336,11 @@ export interface FileRouteTypes {
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
+    | '/home/budgets'
+    | '/home/profile'
+    | '/home/settings'
+    | '/home/transactions'
+    | '/home/wallets'
     | '/home'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -265,6 +355,11 @@ export interface FileRouteTypes {
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
+    | '/home/budgets'
+    | '/home/profile'
+    | '/home/settings'
+    | '/home/transactions'
+    | '/home/wallets'
     | '/home'
   id:
     | '__root__'
@@ -279,6 +374,11 @@ export interface FileRouteTypes {
     | '/errors/403'
     | '/errors/404'
     | '/errors/offline'
+    | '/home/budgets'
+    | '/home/profile'
+    | '/home/settings'
+    | '/home/transactions'
+    | '/home/wallets'
     | '/home/'
   fileRoutesById: FileRoutesById
 }
@@ -295,6 +395,11 @@ export interface RootRouteChildren {
   Errors403Route: typeof Errors403Route
   Errors404Route: typeof Errors404Route
   ErrorsOfflineRoute: typeof ErrorsOfflineRoute
+  HomeBudgetsRoute: typeof HomeBudgetsRoute
+  HomeProfileRoute: typeof HomeProfileRoute
+  HomeSettingsRoute: typeof HomeSettingsRoute
+  HomeTransactionsRoute: typeof HomeTransactionsRoute
+  HomeWalletsRoute: typeof HomeWalletsRoute
   HomeIndexRoute: typeof HomeIndexRoute
 }
 
@@ -310,6 +415,11 @@ const rootRouteChildren: RootRouteChildren = {
   Errors403Route: Errors403Route,
   Errors404Route: Errors404Route,
   ErrorsOfflineRoute: ErrorsOfflineRoute,
+  HomeBudgetsRoute: HomeBudgetsRoute,
+  HomeProfileRoute: HomeProfileRoute,
+  HomeSettingsRoute: HomeSettingsRoute,
+  HomeTransactionsRoute: HomeTransactionsRoute,
+  HomeWalletsRoute: HomeWalletsRoute,
   HomeIndexRoute: HomeIndexRoute,
 }
 
@@ -334,6 +444,11 @@ export const routeTree = rootRoute
         "/errors/403",
         "/errors/404",
         "/errors/offline",
+        "/home/budgets",
+        "/home/profile",
+        "/home/settings",
+        "/home/transactions",
+        "/home/wallets",
         "/home/"
       ]
     },
@@ -369,6 +484,21 @@ export const routeTree = rootRoute
     },
     "/errors/offline": {
       "filePath": "errors/offline.tsx"
+    },
+    "/home/budgets": {
+      "filePath": "home/budgets.tsx"
+    },
+    "/home/profile": {
+      "filePath": "home/profile.tsx"
+    },
+    "/home/settings": {
+      "filePath": "home/settings.tsx"
+    },
+    "/home/transactions": {
+      "filePath": "home/transactions.tsx"
+    },
+    "/home/wallets": {
+      "filePath": "home/wallets.tsx"
     },
     "/home/": {
       "filePath": "home/index.tsx"

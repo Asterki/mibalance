@@ -1,17 +1,81 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>MiCuadro</title>
-		<meta name="description" content="Notoa" />
-		<link rel="icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-		<link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF" />
-		<meta name="theme-color" content="#ffffff" />
-		<link rel="shortcut icon" href="/icons/ios/50.png" type="image/x-icon" />
-	</head>
-	<body>
-		<div id="root"></div>
-		<script type="module" src="/src/main.tsx"></script>
-	</body>
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MiBalance – Personal Finance Simplified</title>
+    <meta
+      name="description"
+      content="MiBalance helps you manage your money, track spending, and stay in control of your finances—online or offline."
+    />
+    <meta name="author" content="MiBalance Team" />
+
+    <!-- SEO Keywords -->
+    <meta
+      name="keywords"
+      content="finance tracker, budgeting, personal finance, expense tracking, MiBalance, MiDinero"
+    />
+
+    <!-- Theme & Color -->
+    <meta name="theme-color" content="#1f2937" />
+    <meta name="msapplication-TileColor" content="#1f2937" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/mask-icon.svg" color="#1f2937" />
+    <link rel="shortcut icon" href="/icons/ios/50.png" type="image/x-icon" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="MiBalance" />
+    <meta
+      property="og:description"
+      content="Take control of your personal finances with MiBalance."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://mibalance.app" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MiBalance" />
+    <meta
+      name="twitter:description"
+      content="MiBalance is the smart way to manage your money with clean dashboards and automation."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Mobile App Capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiBalance" />
+
+    <!-- Preconnect (Performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Optional: Inline Critical Styles / CSS Imports -->
+    <!-- <link rel="stylesheet" href="/styles.css" /> -->
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >MiBalance requires JavaScript to function properly. Please enable it in
+        your browser settings.</strong
+      >
+    </noscript>
+
+    <div id="root"></div>
+
+    <!-- Main JavaScript Bundle -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
