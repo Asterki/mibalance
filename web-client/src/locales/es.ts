@@ -357,6 +357,118 @@ const translation = {
         },
       },
     },
+
+    budgets: {
+      page: {
+        title: "Presupuestos",
+        description:
+          "Aquí puedes ver y administrar todos tus presupuestos. Puedes crear, editar o eliminar presupuestos según sea necesario.",
+        createBudget: "Crear nuevo presupuesto",
+      },
+
+      table: {
+        total: "{{range}} de {{total}} presupuestos",
+        name: "Nombre",
+        description: "Descripción",
+        amount: "Monto",
+        currency: "Moneda",
+        startDate: "Fecha de inicio",
+        endDate: "Fecha de finalización",
+        actions: "Acciones",
+        editTooltip: "Editar presupuesto",
+        deleteTooltip: "Eliminar presupuesto",
+      },
+
+      modals: {
+        update: {
+          title: "Actualizar presupuesto existente",
+          ok: "Actualizar",
+          cancel: "Cancelar",
+          name: "Nombre del presupuesto",
+          description: "Descripción del presupuesto",
+          amount: "Monto del presupuesto (en la moneda seleccionada)",
+          currency: "Moneda (código ISO 4217)",
+          startDate: "Fecha de inicio del presupuesto (YYYY-MM-DD)",
+          endDate: "Fecha de finalización del presupuesto (YYYY-MM-DD)",
+
+          messages: {
+            "name-too-short": "El nombre del presupuesto es obligatorio.",
+            "name-too-long":
+              "El nombre del presupuesto no puede exceder los 100 caracteres.",
+            "description-too-long":
+              "La descripción del presupuesto no puede exceder los 500 caracteres.",
+            "amount-negative":
+              "El monto del presupuesto no puede ser negativo.",
+            "currency-required":
+              "Debe especificar una moneda para el presupuesto.",
+            "currency-invalid-length":
+              "El código de moneda debe tener exactamente 3 caracteres según la norma ISO 4217.",
+            success: "Presupuesto actualizado con éxito",
+          },
+        },
+
+        create: {
+          title: "Crear nuevo presupuesto",
+          ok: "Crear",
+          cancel: "Cancelar",
+          name: "Nombre del presupuesto",
+          description: "Descripción del presupuesto",
+          amount: "Monto del presupuesto (en la moneda seleccionada)",
+          currency: "Moneda (código ISO 4217)",
+          startDate:
+            'Fecha de inicio del presupuesto (formato YYYY-MM-DD, por ejemplo, "{{date}}")',
+          endDate:
+            'Fecha de finalización del presupuesto (formato YYYY-MM-DD, por ejemplo, "{{date}}")',
+
+          messages: {
+            "name-too-short": "El nombre del presupuesto es obligatorio.",
+            "name-too-long":
+              "El nombre del presupuesto no puede exceder los 100 caracteres.",
+            "description-too-long":
+              "La descripción del presupuesto no puede exceder los 500 caracteres.",
+            "amount-negative":
+              "El monto del presupuesto no puede ser negativo.",
+            "currency-required":
+              "Debe especificar una moneda para el presupuesto.",
+            "currency-invalid-length":
+              "El código de moneda debe tener exactamente 3 caracteres según la norma ISO 4217.",
+            success: "Presupuesto creado con éxito",
+          },
+        },
+      },
+    },
+
+    settings: {
+      page: {
+        title: "Configuraciones",
+        description:
+          "Aquí puedes ajustar la configuración de tu cuenta, incluyendo preferencias de idioma, notificaciones y más.",
+        updateProfile: "Actualizar perfil",
+        changePassword: "Cambiar contraseña",
+        deleteAccount: "Eliminar cuenta",
+      },
+
+      panels: {
+        account: {
+          title: "Cuenta",
+          actions: {
+            "change-password": "Cambiar contraseña",
+            "change-email": "Cambiar correo electrónico",
+          },
+        },
+      },
+
+      modals: {
+        "change-password": {
+          title: "Cambiar contraseña",
+          fields: {
+            "current-password": "Contraseña actual",
+            "new-password": "Nueva contraseña",
+            "confirm-new-password": "Confirmar nueva contraseña",
+          },
+        },
+      },
+    },
   },
 };
 

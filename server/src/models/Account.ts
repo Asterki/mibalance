@@ -29,6 +29,17 @@ export type IAccount = mongoose.Document & {
       forgotPasswordTokenExpires: Date | null;
       lastPasswordChange: Date;
     };
+    notifications: {
+      newLogins: boolean;
+      passwordChanges: boolean;
+      walletUpdates: boolean;
+      accountStatusChanges: boolean;
+      emailChanges: boolean;
+      profileChanges: boolean;
+      securityAlerts: boolean;
+      generalUpdates: boolean;
+      marketing: boolean;
+    };
   };
   updatedAt: Date;
   createdAt: Date;
@@ -71,6 +82,17 @@ const accountSchema = new mongoose.Schema<IAccount>(
         forgotPasswordToken: { type: String, default: null },
         forgotPasswordTokenExpires: { type: Date, default: null },
         lastPasswordChange: { type: Date, default: () => new Date() },
+      },
+      notifications: {
+        newLogins: { type: Boolean, default: true },
+        passwordChanges: { type: Boolean, default: true },
+        walletUpdates: { type: Boolean, default: true },
+        accountStatusChanges: { type: Boolean, default: true },
+        emailChanges: { type: Boolean, default: true },
+        profileChanges: { type: Boolean, default: true },
+        securityAlerts: { type: Boolean, default: true },
+        generalUpdates: { type: Boolean, default: true },
+        marketing: { type: Boolean, default: true },
       },
     },
     updatedAt: { type: Date, default: () => new Date() },

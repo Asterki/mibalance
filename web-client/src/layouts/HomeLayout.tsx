@@ -110,9 +110,20 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
             onClick={() => setDrawerVisible(true)}
             className="md:hidden text-xl"
           />
-          <h1 className="text-lg font-semibold text-black dark:text-white">
-            {t("dashboard:sidebar.title")}
-          </h1>
+          <div className="flex items-center gap-2">
+            <Link to="/home">
+              <img
+                src="/icon.png"
+                alt="Logo"
+                className="h-8 w-auto"
+                style={{ filter: isDark ? "invert(1)" : "none" }}
+              />
+            </Link>
+
+            <h1 className="text-lg font-semibold text-black dark:text-white">
+              {t("dashboard:sidebar.title")}
+            </h1>
+          </div>
         </Header>
 
         <Layout hasSider>
@@ -152,7 +163,7 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
               {children}
             </Content>
             <Footer className="text-center bg-white dark:bg-neutral-800 dark:text-white">
-              © {new Date().getFullYear()} Asterki MiApps 
+              © {new Date().getFullYear()} Asterki MiApps
             </Footer>
           </Layout>
         </Layout>

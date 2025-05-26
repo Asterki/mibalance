@@ -27,7 +27,6 @@ import {
   Select,
   Checkbox,
   Drawer,
-  Switch,
 } from "antd";
 const { Title, Text } = Typography;
 
@@ -824,7 +823,7 @@ function RouteComponent() {
       </div>
 
       <Table
-        className="mt-4 overflow-x-scroll"
+        className="mt-4 overflow-x-scroll w-full"
         dataSource={wallets.wallets}
         loading={walletListState.loading}
         rowKey={(record) => record._id}
@@ -849,6 +848,7 @@ function RouteComponent() {
           {
             title: t("dashboard:wallets.table.colorIcon"),
             key: "colorIcon",
+            responsive: ["xl"],
             render: (_, record) => (
               <div className="flex items-center gap-2">
                 <span
@@ -927,11 +927,13 @@ function RouteComponent() {
             dataIndex: "description",
             key: "description",
             ellipsis: true,
+            responsive: ["xl"],
           },
           {
             title: t("dashboard:wallets.table.institution"),
             dataIndex: "institution",
             key: "institution",
+            responsive: ["xl"],
           },
           {
             title: t("dashboard:wallets.table.currency"),
