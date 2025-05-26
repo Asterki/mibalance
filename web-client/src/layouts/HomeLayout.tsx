@@ -152,7 +152,7 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
               {children}
             </Content>
             <Footer className="text-center bg-white dark:bg-neutral-800 dark:text-white">
-              © {new Date().getFullYear()} Asterki MiProducts
+              © {new Date().getFullYear()} Asterki MiApps 
             </Footer>
           </Layout>
         </Layout>

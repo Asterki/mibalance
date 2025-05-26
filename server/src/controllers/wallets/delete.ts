@@ -31,6 +31,8 @@ const handler = async (
     wallet.deleted = true;
     wallet.deletedAt = new Date();
 
+    await wallet.save();  
+
     LoggingService.log({
       source: "wallet:delete",
       level: "info",
