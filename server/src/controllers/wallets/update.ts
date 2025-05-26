@@ -39,6 +39,22 @@ const handler = async (
     if (color !== undefined) updateFields.color = color;
     if (icon !== undefined) updateFields.icon = icon;
 
+    if (typeof updateFields.isPrimary == "boolean" && updateFields.isPrimary) {
+      // Then check if there is already a primary wallet, if so, unset it
+      WalletModel.findOneAndUpdate(
+        { account: account._id, isPrimary: true },
+        { $set: { isPrimary: false } },
+        { new: true },
+      ).catch((err) => {
+        LoggingService.log({
+          source: "wallets:update",
+          level: "error",
+          message: "Error unsetting previous primary wallet",
+          details: { error: err.message, stack: err.stack },
+        });
+      });
+    }
+
     const updatedWallet = await WalletModel.findOneAndUpdate(
       { _id: walletId, account: account._id },
       { $set: updateFields },

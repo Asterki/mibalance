@@ -42,6 +42,21 @@ const handler = async (
       updatedAt: Date.now(),
     });
 
+    // If this wallet is primary, unset any existing primary wallet
+    if (wallet.isPrimary) {
+      await WalletModel.updateMany(
+        { account: account._id, isPrimary: true },
+        { $set: { isPrimary: false } },
+      ).catch((err) => {
+        LoggingService.log({
+          source: "wallet:create",
+          level: "error",
+          message: "Error unsetting previous primary wallet",
+          details: { error: err.message, stack: err.stack },
+        });
+      });
+    }
+
     await wallet.save();
 
     LoggingService.log({

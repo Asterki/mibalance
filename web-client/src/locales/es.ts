@@ -241,6 +241,7 @@ const translation = {
         institution: "Institución",
         color: "Color",
         icon: "Ícono",
+        colorIcon: "Color/Ícono",
         primary: "Principal",
         "type.cash": "Efectivo",
         "type.bank": "Banco",

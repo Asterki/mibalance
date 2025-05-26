@@ -27,6 +27,7 @@ import {
   Select,
   Checkbox,
   Drawer,
+  Switch,
 } from "antd";
 const { Title, Text } = Typography;
 
