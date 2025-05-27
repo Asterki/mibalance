@@ -6,6 +6,7 @@ import WalletRouter from "./wallets";
 import RecurringRouter from "./recurring";
 import BudgetsRouter from "./budgets";
 import FilesRouter from "./files";
+import TransactionsRouter from "./transactions";
 
 class Router {
   private instance: Router | null = null;
@@ -23,6 +24,7 @@ class Router {
     server.use("/api/recurring", RecurringRouter);
     server.use("/api/budgets", BudgetsRouter);
     server.use("/api/files", FilesRouter);
+    server.use("/api/transactions", TransactionsRouter);
   };
 }
 

@@ -41,13 +41,14 @@ const handler = async (
       res.status(404).json({
         status: "wallet-not-found",
       });
-      return; 
+      return;
     }
 
     // Construct the new transaction document
     const transaction = new TransactionModel({
       account: account._id,
       type,
+      wallet: walletId,
       amount,
       currency,
       category,

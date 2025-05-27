@@ -4,16 +4,14 @@ import mongoose from "mongoose";
 
 // Controllers
 import createHandler from "../controllers/transactions/create";
-import updateHandler from "../controllers/transactions/update";
+// import updateHandler from "../controllers/transactions/update";
 import deleteHandler from "../controllers/transactions/delete";
 import getHandler from "../controllers/transactions/get";
 import listHandler from "../controllers/transactions/list";
 
 // Middleware
 import { validateRequestBody } from "../middleware/validationMiddleware";
-import {
-  ensureAuthenticated,
-} from "../middleware/authMiddleware";
+import { ensureAuthenticated } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
@@ -38,6 +36,7 @@ const paymentMethodEnum = z.enum([
 const transactionFieldsEnum = z.enum([
   "_id",
   "account",
+  "wallet",
   "type",
   "amount",
   "currency",
@@ -49,7 +48,7 @@ const transactionFieldsEnum = z.enum([
   "isRecurring",
   "recurrence",
   "tags",
-  "isCleared",
+  "deleted",
   "notes",
   "attachments",
   "createdAt",
@@ -82,7 +81,7 @@ router.post(
   "/create",
   validateRequestBody(
     z.object({
-      account: objectId,
+      walletId: objectId,
       type: typeEnum,
       amount: z.number().min(0),
       currency: z.string().trim().min(3).max(5).optional().default("USD"),
@@ -128,7 +127,7 @@ router.post(
       attachments: z.array(attachmentSchema).max(5).nullable().optional(),
     }),
   ),
-  updateHandler,
+  // updateHandler,
 );
 
 // Delete transaction

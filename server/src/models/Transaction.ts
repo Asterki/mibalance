@@ -3,6 +3,7 @@ import { Schema, model, Types } from "mongoose";
 import { IAccount } from "./Account";
 
 export interface ITransaction {
+  _id: Types.ObjectId; // Reference to the user who owns the transaction
   account: Types.ObjectId | IAccount; // Reference to the user who owns the transaction
   wallet: Types.ObjectId; // Reference to the wallet associated with the transaction
   type: "income" | "expense" | "transfer";
@@ -32,7 +33,8 @@ export interface ITransaction {
     interval?: number; // e.g., every 2 weeks
   };
   tags?: string[]; // e.g., ['groceries', 'work', 'business']
-  isCleared?: boolean; // For pending or future-dated transactions
+  deleted?: boolean;
+  deletedAt?: Date;
   notes?: string;
   attachments?: {
     fileUrl: string;
@@ -51,6 +53,7 @@ const TransactionSchema = new Schema<ITransaction>(
       enum: ["income", "expense", "transfer"],
       required: true,
     },
+    wallet: { type: Schema.Types.ObjectId, required: true }, // Reference to the wallet
     amount: { type: Number, required: true, min: 0 },
     currency: { type: String, default: "USD" },
     category: { type: String, required: true },
@@ -78,7 +81,8 @@ const TransactionSchema = new Schema<ITransaction>(
       interval: { type: Number, min: 1, default: 1 },
     },
     tags: [{ type: String }],
-    isCleared: { type: Boolean, default: true },
+    deleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
     notes: { type: String },
     attachments: [
       {

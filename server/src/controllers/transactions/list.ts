@@ -18,43 +18,53 @@ const handler = async (
       fields,
       filters,
       search,
-      includeCleared = true,
-      dateRange,
-      type,
+      includeDeleted = true,
     } = req.body;
 
-    // Build query object scoped to the account
-    const query: Record<string, any> = { account: account._id };
+    // Base query: scope to account
+    const query: Record<string, any> = {
+      account: account._id,
+    };
 
+    // Apply filters
     if (filters) {
-      if (filters.dateStart)
-        query.date = { ...query.date, $gte: new Date(filters.dateStart) };
-      if (filters.dateEnd)
-        query.date = { ...query.date, $lte: new Date(filters.dateEnd) };
-      if (typeof filters.category === "string")
-        query.category = filters.category;
-      if (typeof filters.type === "string") query.type = filters.type;
-      if (filters.tags?.length) query.tags = { $in: filters.tags };
+      if (filters.type) query.type = filters.type;
+      if (filters.category) query.category = filters.category;
+      if (filters.walletId) {
+        query.account = filters.walletId; // Assuming walletId is the account ID
+      }
+
+      if (filters.dateStart || filters.dateEnd) {
+        query.date = {};
+        if (filters.dateStart) query.date.$gte = new Date(filters.dateStart);
+        if (filters.dateEnd) query.date.$lte = new Date(filters.dateEnd);
+      }
     }
 
+    // Search logic
     if (search?.query && search?.searchIn?.length) {
-      const searchRegex = new RegExp(search.query, "i");
-      query.$or = search.searchIn.map((field) => ({ [field]: searchRegex }));
+      const regex = new RegExp(search.query, "i");
+      query.$or = search.searchIn.map((field) => ({ [field]: regex }));
     }
 
-    if (!includeCleared) {
-      query.isCleared = false;
+    // Soft-delete logic
+    if (!includeDeleted) {
+      query.deleted = false;
     }
 
-    // Count total matching documents for pagination
-    const totalTransactions = await TransactionModel.countDocuments(query);
-
-    // Select fields if requested, else all
+    // Projection
     const projection = fields?.length
-      ? fields.reduce((acc, field) => ({ ...acc, [field]: 1 }), {})
+      ? fields.reduce(
+          (acc, field) => {
+            acc[field] = 1;
+            return acc;
+          },
+          {} as Record<string, 1>,
+        )
       : {};
 
-    // Query with pagination and sorting (descending by date)
+    // Count + fetch
+    const totalTransactions = await TransactionModel.countDocuments(query);
     const transactions = await TransactionModel.find(query, projection)
       .sort({ date: -1 })
       .skip(page * count)

@@ -74,7 +74,7 @@ router.post(
   "/get",
   validateRequestBody(
     z.object({
-      walletIds: z.array(objectId).min(1).max(100),
+      walletIds: z.array(objectId).min(0).max(100),
       fields: z
         .array(
           z.enum([

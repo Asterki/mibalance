@@ -438,6 +438,113 @@ const translation = {
       },
     },
 
+    transactions: {
+      page: {
+        title: "Transacciones",
+        description:
+          "Aquí puedes ver y administrar todas tus transacciones. Puedes agregar, editar o eliminar transacciones según sea necesario.",
+        createTransaction: "Crear nueva transacción",
+      },
+
+      table: {
+        total: "{{range}} de {{total}} transacciones",
+        wallet: "Cartera",
+        isRecurring: "Recurrente",
+        date: "Fecha",
+        amount: "Monto",
+        currency: "Moneda",
+        type: "Tipo",
+        category: "Categoría",
+        description: "Descripción",
+        tags: "Etiquetas",
+        actions: "Acciones",
+        editTooltip: "Editar transacción",
+        deleteTooltip: "Eliminar transacción",
+      },
+
+      types: {
+        income: "Ingreso",
+        expense: "Gasto",
+        transfer: "Transferencia",
+      },
+
+      recurrence: {
+        daily: "Diariamente",
+        weekly: "Semanalmente",
+        biweekly: "Quincenalmente",
+        monthly: "Mensualmente",
+        quarterly: "Trimestralmente",
+        yearly: "Anualmente",
+      },
+
+      payment: {
+        cash: "Efectivo",
+        credit_card: "Tarjeta de crédito",
+        debit_card: "Tarjeta de débito",
+        bank_transfer: "Transferencia bancaria",
+        crypto: "Criptomoneda",
+        other: "Otro",
+      },
+
+      modals: {
+        create: {
+          confirm: "Crear transacción",
+          cancel: "Cancelar",
+          title: "Crear nueva transacción",
+          sections: {
+            basic: "Información básica",
+            advanced: "Opciones avanzadas",
+            recurrence: "Opciones de recurrencia",
+          },
+          type: "Tipo de transacción",
+          amount: "Monto de la transacción",
+          wallet: "Cartera",
+          category: "Categoría",
+          subcategory: "Subcategoría",
+          date: "Fecha de la transacción",
+          description: "Descripción de la transacción",
+          paymentMethod: "Método de pago",
+          tags: "Etiquetas (separadas por comas)",
+          notes: "Notas adicionales",
+          isRecurring: "¿Esta transacción se repite?",
+          recurrence: {
+            frequency: "Frecuencia de recurrencia",
+            startDate: "Fecha de inicio",
+            endDate: "Fecha de finalización",
+            interval: "Intervalo (en días)",
+            occurrences: "Número de ocurrencias",
+          },
+
+          messages: {
+            success: "Transacción creada con éxito",
+            "invalid-recurrence-frequency":
+              "La frecuencia de repetición no es válida.",
+            "invalid-end-date": "La fecha de finalización no es válida.",
+            "invalid-recurrence-interval":
+              "El intervalo de repetición no es válido.",
+            "invalid-file-url": "La URL del archivo no es válida.",
+            "invalid-file-name": "El nombre del archivo no es válido.",
+            "invalid-uploadedAt": "La fecha de subida no es válida.",
+            "wallet-id-required": "Debe seleccionar una billetera válida.",
+            "invalid-transaction-type": "El tipo de transacción no es válido.",
+            "invalid-amount": "El monto ingresado no es válido.",
+            "invalid-currency": "El código de moneda no es válido.",
+            "invalid-category": "La categoría ingresada no es válida.",
+            "invalid-subcategory": "La subcategoría ingresada no es válida.",
+            "invalid-date": "La fecha ingresada no es válida.",
+            "invalid-description":
+              "La descripción excede el límite permitido o es inválida.",
+            "invalid-payment-method":
+              "El método de pago seleccionado no es válido.",
+            "invalid-tag": "La etiqueta ingresada no es válida.",
+            "invalid-tags": "Las etiquetas ingresadas no son válidas.",
+            "invalid-notes": "Las notas ingresadas no son válidas.",
+            "invalid-attachments": "Los archivos adjuntos no son válidos.",
+          },
+        },
+      },
+    },
+
     settings: {
       page: {
         title: "Configuraciones",

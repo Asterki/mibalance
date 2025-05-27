@@ -51,12 +51,11 @@ export type ListRequestBody = {
   fields?: Array<keyof ITransaction>;
   includeDeleted?: boolean;
   filters?: {
-    account?: string;
+    walletId?: string;
     type?: "income" | "expense" | "transfer";
     category?: string;
     dateStart?: string;
     dateEnd?: string;
-    isCleared?: boolean;
   };
   search?: {
     query: string;

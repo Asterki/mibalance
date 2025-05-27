@@ -409,20 +409,27 @@ function RouteComponent() {
 
   return (
     <HomeLayout selectedPage="wallets">
-      <Modal
+      <Drawer
         title={t("dashboard:wallets.modals.create.title")}
         open={createWalletState.open}
-        onOk={createWallet}
-        onCancel={() => {
+        onClose={() => {
           setCreateWalletState((prev) => ({
             ...prev,
             open: false,
           }));
         }}
-        confirmLoading={createWalletState.loading}
-        okText={t("dashboard:wallets.modals.create.ok")}
-        cancelText={t("dashboard:wallets.modals.create.cancel")}
         destroyOnClose
+        width={800} 
+        extra={
+          <Button
+            type="primary"
+            onClick={createWallet}
+            loading={createWalletState.loading}
+          >
+            {t("dashboard:wallets.modals.create.ok")}
+          </Button>
+        } 
+
       >
         <Form layout="vertical" initialValues={createWalletState}>
           <Form.Item
@@ -582,7 +589,7 @@ function RouteComponent() {
             />
           </Form.Item>
         </Form>
-      </Modal>
+      </Drawer>
 
       <Drawer
         title={t("dashboard:wallets.modals.update.title")}
