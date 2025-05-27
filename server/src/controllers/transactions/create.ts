@@ -32,12 +32,12 @@ const handler = async (
       attachments,
     } = req.body;
 
-    const walletExists = await WalletModel.findOne({
+    const wallet = await WalletModel.findOne({
       _id: walletId,
       account: account._id,
       deleted: false,
     });
-    if (!walletExists) {
+    if (!wallet) {
       res.status(404).json({
         status: "wallet-not-found",
       });
@@ -79,6 +79,11 @@ const handler = async (
     });
 
     await transaction.save();
+
+    // Update the wallet's balance
+    wallet.balance += type === "income" ? amount : -amount;
+    wallet.updatedAt = new Date(); 
+    await wallet.save();
 
     // TODO: if it's recurring create a recurring transaction one
 

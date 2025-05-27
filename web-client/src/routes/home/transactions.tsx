@@ -862,12 +862,6 @@ function RouteComponent() {
               })}`,
           },
           {
-            title: t("dashboard:transactions.table.currency"),
-            dataIndex: "currency",
-            key: "currency",
-            responsive: ["xl"],
-          },
-          {
             title: t("dashboard:transactions.table.category"),
             dataIndex: "category",
             key: "category",
