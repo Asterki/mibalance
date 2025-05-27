@@ -18,9 +18,7 @@ import {
   Table,
   Collapse,
   DatePicker,
-  ColorPicker,
   Modal,
-  Space,
   Tooltip,
   Tag,
   Form,
@@ -83,6 +81,19 @@ function RouteComponent() {
     currency: string;
     category: string;
     isRecurring: boolean;
+    date: Date;
+    subcategory?: string;
+    recurrence?: {
+      frequency:
+        | "daily"
+        | "weekly"
+        | "biweekly"
+        | "monthly"
+        | "quarterly"
+        | "yearly";
+      endDate?: string;
+      interval?: number;
+    };
   }
   const [transactions, setTransactions] = useState<{
     totalTransactions: number;
@@ -142,6 +153,9 @@ function RouteComponent() {
         "type",
         "amount",
         "currency",
+        "subcategory",
+        "recurrence",
+        "date",
         "category",
         "isRecurring",
       ],
@@ -169,6 +183,15 @@ function RouteComponent() {
           currency: tx.currency,
           category: tx.category,
           isRecurring: tx.isRecurring ?? false,
+          date: new Date(tx.date),
+          subcategory: tx.subcategory,
+          recurrence: tx.recurrence
+            ? {
+                frequency: tx.recurrence.frequency,
+                endDate: tx.recurrence.endDate?.toString(),
+                interval: tx.recurrence.interval,
+              }
+            : undefined,
         })),
       });
     } else {
@@ -363,6 +386,46 @@ function RouteComponent() {
     }
   };
 
+  const [deleteTransactionState, setDeleteTransactionState] = useState<{
+    open: boolean;
+    loading: boolean;
+    transactionId: string;
+  }>({
+    open: false,
+    loading: false,
+    transactionId: "",
+  });
+  const deleteTransaction = async () => {
+    if (deleteTransactionState.loading) return;
+
+    setDeleteTransactionState((prev) => ({
+      ...prev,
+      loading: true,
+    }));
+
+    const result = await TransactionFeature.transactionAPI.delete({
+      transactionId: deleteTransactionState.transactionId,
+    });
+
+    if (result.status === "success") {
+      message.success(
+        t("dashboard:transactions.modals.delete.messages.success"),
+      );
+      setDeleteTransactionState({
+        open: false,
+        loading: false,
+        transactionId: "",
+      });
+      fetchTransactions({});
+    } else {
+      message.error(t(`error-messages:${result.status}`));
+      setDeleteTransactionState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    }
+  };
+
   useEffect(() => {
     fetchTransactions({});
     fetchWallets();
@@ -489,27 +552,49 @@ function RouteComponent() {
                 label={t("dashboard:transactions.modals.create.category")}
                 required
               >
-                <Input
+                <Select
                   value={createTransactionState.category}
                   onChange={(e) =>
                     setCreateTransactionState((prev) => ({
                       ...prev,
-                      category: e.target.value,
+                      category: e,
                     }))
                   }
+                  options={TransactionFeature.transactionCategories.map(
+                    (category) => {
+                      return {
+                        label: t(
+                          `dashboard:transactions.categories.${category}`,
+                        ),
+                        value: category,
+                      };
+                    },
+                  )}
                 />
               </Form.Item>
 
               <Form.Item
                 label={t("dashboard:transactions.modals.create.subcategory")}
               >
-                <Input
+                <Select
                   value={createTransactionState.subcategory}
                   onChange={(e) =>
                     setCreateTransactionState((prev) => ({
                       ...prev,
-                      subcategory: e.target.value,
+                      subcategory: e,
                     }))
+                  }
+                  options={
+                    createTransactionState.category
+                      ? TransactionFeature.transactionSubcategories[
+                          createTransactionState.category
+                        ].map((subcategory: string) => ({
+                          label: t(
+                            `dashboard:transactions.subcategories.${createTransactionState.category}-${subcategory}`,
+                          ),
+                          value: subcategory,
+                        }))
+                      : []
                   }
                 />
               </Form.Item>
@@ -748,6 +833,29 @@ function RouteComponent() {
         </Form>
       </Drawer>
 
+      <Modal
+        title={t("dashboard:transactions.modals.delete.title")}
+        open={deleteTransactionState.open}
+        onCancel={() =>
+          setDeleteTransactionState((prev) => ({
+            ...prev,
+            open: false,
+          }))
+        }
+        okText={t("dashboard:transactions.modals.delete.confirm")}
+        cancelText={t("dashboard:transactions.modals.delete.cancel")}
+        onOk={deleteTransaction}
+        confirmLoading={deleteTransactionState.loading}
+        okButtonProps={{ danger: true }}
+        cancelButtonProps={{ disabled: deleteTransactionState.loading }}
+      >
+        <Text>
+          {t("dashboard:transactions.modals.delete.confirmation", {
+            transactionId: deleteTransactionState.transactionId,
+          })}
+        </Text>
+      </Modal>
+
       <div className="mb-2">
         {t("dashboard:common.loggedInAs", {
           name: account?.profile.name,
@@ -862,29 +970,55 @@ function RouteComponent() {
               })}`,
           },
           {
+            title: t("dashboard:transactions.table.date"),
+            dataIndex: "date",
+            key: "date",
+            render: (date) => dayjs(date).format("YYYY-MM-DD HH:mm:ss"),
+          },
+          {
             title: t("dashboard:transactions.table.category"),
             dataIndex: "category",
             key: "category",
-            render: (category) => <Tag>{category}</Tag>,
+            render: (category) => (
+              <Tag>{t(`dashboard:transactions.categories.${category}`)}</Tag>
+            ),
             responsive: ["lg"],
           },
           {
-            title: t("dashboard:transactions.table.isRecurring"),
-            dataIndex: "isRecurring",
-            key: "isRecurring",
-            render: (isRecurring) =>
-              isRecurring ? (
-                <Tag color="purple">
-                  {t("dashboard:transactions.recurring")}
+            title: t("dashboard:transactions.table.subcategory"),
+            dataIndex: "subcategory",
+            key: "subcategory",
+            render: (subcategory, record) =>
+              subcategory ? (
+                <Tag>
+                  {t(
+                    `dashboard:transactions.subcategories.${record.category}-${record.subcategory}`,
+                  )}
                 </Tag>
               ) : null,
+            responsive: ["lg"],
+          },
+          {
+            title: t("dashboard:transactions.table.recurrence"),
+            render: (_, record) =>
+              record.isRecurring ? (
+                <Tag color="orange">
+                  {t(
+                    `dashboard:transactions.recurrence.${record.recurrence?.frequency}`,
+                  )}
+                </Tag>
+              ) : (
+                <Tag color="gray">
+                  {t("dashboard:transactions.recurrence.none")}
+                </Tag>
+              ),
             responsive: ["lg"],
           },
           {
             title: t("dashboard:transactions.table.actions"),
             key: "actions",
             fixed: "right",
-            render: (_) => (
+            render: (record) => (
               <div className="flex items-center gap-2">
                 <Tooltip title={t("dashboard:transactions.table.editTooltip")}>
                   <Button
@@ -905,7 +1039,11 @@ function RouteComponent() {
                     variant="outlined"
                     danger
                     onClick={() => {
-                      // Set delete state like setDeleteTransactionState
+                      setDeleteTransactionState({
+                        open: true,
+                        loading: false,
+                        transactionId: record._id,
+                      });
                     }}
                   >
                     <FaTrash />

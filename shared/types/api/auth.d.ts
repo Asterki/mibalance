@@ -183,6 +183,17 @@ export interface UpdateProfileResponseData {
 export interface UpdatePreferencesRequestBody {
   theme?: string;
   language?: string;
+  notifications?: {
+    newLogins: boolean;
+    passwordChanges: boolean;
+    walletUpdates: boolean;
+    accountStatusChanges: boolean;
+    emailChanges: boolean;
+    profileChanges: boolean;
+    securityAlerts: boolean;
+    generalUpdates: boolean;
+    marketing: boolean;
+  };
 }
 export interface UpdatePreferencesResponseData {
   status: ResponseStatus;

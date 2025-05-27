@@ -87,7 +87,7 @@ function RouteComponent() {
         {/* Greeting Section */}
         <Row justify="center" className="mb-12">
           <Col xs={24} sm={20} md={16} lg={12}>
-            <Card className="rounded-lg shadow-md bg-gray-50">
+            <Card className="rounded-lg shadow-md bg-gray-50 dark:bg-neutral-700">
               <Title level={3} style={{ color: "#1890ff", marginBottom: 8 }}>
                 {greeting}, {account?.profile.name}
               </Title>
@@ -107,7 +107,7 @@ function RouteComponent() {
             <Col xs={24} sm={12} md={8} lg={6} key={index}>
               <Card
                 hoverable
-                className="flex flex-col items-center text-center p-6 rounded-lg bg-gray-50 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+                className="flex flex-col items-center text-center p-6 rounded-lg bg-gray-50 dark:bg-neutral-700 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
               >
                 <div className="text-blue-500 mb-4 text-center flex justify-center w-full">
                   {link.icon}

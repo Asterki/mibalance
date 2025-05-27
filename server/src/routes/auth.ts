@@ -190,7 +190,7 @@ router.post(
     ensureAuthenticated,
     validateRequestBody(
       z.object({
-        password: z.string().min(8).max(100),
+        password: z.string().max(100),
         tfaCode: z.string(),
         secret: z.string(),
       }),
@@ -220,7 +220,7 @@ router.post(
     ensureAuthenticated,
     validateRequestBody(
       z.object({
-        tfaCode: z.string().min(6).max(6), // TFA codes are typically 6 digits
+        tfaCode: z.string(), // TFA codes are typically 6 digits
       }),
     ),
   ],

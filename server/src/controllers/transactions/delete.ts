@@ -5,6 +5,7 @@ import LoggingService from "../../services/logging";
 
 import { IAccount } from "../../models/Account";
 import TransactionModel from "../../models/Transaction";
+import WalletModel from "../../models/Wallet";
 
 const handler = async (
   req: Request<{}, {}, TransactionsAPITypes.DeleteRequestBody>,
@@ -26,6 +27,21 @@ const handler = async (
         status: "not-found",
       });
       return;
+    }
+
+    const wallet = await WalletModel.findOne({
+      _id: transaction.wallet,
+      account: account._id,
+    });
+
+    // Revert the transaction amount from the wallet
+    if (wallet) {
+      if (transaction.type === "income") {
+        wallet.balance -= transaction.amount;
+      } else if (transaction.type === "expense") {
+        wallet.balance += transaction.amount;
+      }
+      await wallet.save();
     }
 
     transaction.deleted = true;

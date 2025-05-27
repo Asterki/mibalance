@@ -112,12 +112,7 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
           />
           <div className="flex items-center gap-2">
             <Link to="/home">
-              <img
-                src="/icon.png"
-                alt="Logo"
-                className="h-8 w-auto"
-                style={{ filter: isDark ? "invert(1)" : "none" }}
-              />
+              <img src="/icon.png" alt="Logo" className="h-8 w-auto" />
             </Link>
 
             <h1 className="text-lg font-semibold text-black dark:text-white">

@@ -72,7 +72,7 @@ function RouteComponent() {
         message.success(t("login.messages.success"));
         break;
       case "requires-tfa":
-        message.error(t("login.messages.requires-tfa"));
+        message.warning(t("login.messages.requires-tfa"));
         setLoginState((s) => ({ ...s, loading: false, requiresTfa: true }));
         break;
       case "invalid-credentials":
@@ -109,22 +109,31 @@ function RouteComponent() {
       </Button>
 
       <Modal
-        open={error === "requires-tfa"}
-        title={t("login.tfa")}
+        open={loginState.requiresTfa}
+        title={t("login.tfaModal.title")}
         onOk={handleLogin}
-        okText={t("login.submit")}
-        onCancel={() => dispatch(AuthFeature.authSlice.actions.clearError())}
-        cancelText={t("login.cancel")}
+        okText={t("login.tfaModal.submit")}
+        onCancel={() => {
+          setLoginState((s) => ({ ...s, requiresTfa: false, tfa: "" }));
+        }}
+        cancelText={t("dashboard:common.cancel")}
       >
-        <p>{t("login.tfaDescription")}</p>
-        <Input.Password
-          onChange={(e) =>
-            setLoginState({ ...loginState, tfa: e.target.value })
-          }
-          value={loginState.tfa}
-          autoComplete="one-time-code"
-          placeholder="••••••"
-        />
+        <p>{t("login.tfaModal.description")}</p>
+
+        <br />
+
+        <Form layout="vertical">
+          <Form.Item label={t("login.tfaModal.fields.tfaCode")} required>
+            <Input.Password
+              value={loginState.tfa}
+              onChange={(e) =>
+                setLoginState({ ...loginState, tfa: e.target.value })
+              }
+              autoComplete="one-time-code"
+              placeholder={t("login.tfaModal.fields.tfaCodePlaceholder")}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
 
       <Card
@@ -185,10 +194,7 @@ function RouteComponent() {
           </Link>
         </Typography.Paragraph>
         <Typography.Paragraph className="text-center mt-2">
-          <Link
-            to="/auth/register"
-            className="text-primary hover:underline"
-          >
+          <Link to="/auth/register" className="text-primary hover:underline">
             {t("login.noAccount")}
           </Link>
         </Typography.Paragraph>

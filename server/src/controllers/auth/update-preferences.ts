@@ -12,7 +12,7 @@ const handler = async (
   _next: NextFunction,
 ) => {
   const account = req.user as IAccount;
-  const { theme, language } = req.body;
+  const { theme, language, notifications } = req.body;
 
   try {
     const dbAccount = await AccountModel.findOne({
@@ -27,15 +27,21 @@ const handler = async (
     if (language) {
       dbAccount!.preferences.general.language = language;
     }
+    if (notifications) {
+      dbAccount!.preferences.notifications = {
+        ...dbAccount!.preferences.notifications,
+        ...notifications,
+      };
+    }
 
     await dbAccount!.save();
 
     res.status(200).send({ status: "success" });
   } catch (error: any) {
     LoggingService.log({
-      source: "system",
+      source: "auth:update-preferences",
       level: "error",
-      message: "Unexpected error while enabling TFA",
+      message: "Unexpected error while updating user preferences",
       details: { error: error.message, stack: error.stack },
     });
 

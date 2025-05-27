@@ -9,9 +9,11 @@ import type { RootState } from "../../store";
 
 import HomeLayout from "../../layouts/HomeLayout";
 
+import qrCode from "qrcode";
 import {
   Input,
   Form,
+  QRCode,
   Select,
   Button,
   Switch,
@@ -149,6 +151,7 @@ function RouteComponent() {
 
     const parsedData = changeEmailSchema.safeParse({
       newEmail: changeEmailState.newEmail,
+      password: changeEmailState.password,
     });
 
     if (!parsedData.success) {
@@ -166,7 +169,7 @@ function RouteComponent() {
 
     const result = await AuthFeature.authApi.changeEmail({
       newEmail: changeEmailState.newEmail,
-      password: changeEmailState.newEmail,
+      password: changeEmailState.password,
     });
 
     if (result.status == "success") {
@@ -182,6 +185,178 @@ function RouteComponent() {
     } else {
       message.error(t(`error-messages:${result.status}`));
       setChangeEmailState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    }
+  };
+
+  const [enableTFAState, setEnableTFAState] = useState<{
+    open: boolean;
+    loading: boolean;
+    secret: string | null;
+    code: string;
+    password: string;
+  }>({
+    open: false,
+    loading: false,
+    secret: null,
+    password: "",
+    code: "",
+  });
+  const enableTFASchema = z.object({
+    secret: z.string().min(1, "tfa-secret-required"),
+    code: z.string().min(1, "tfa-code-required"),
+    password: z.string().min(1, "password-required"),
+  });
+  const enableTFA = async () => {
+    setEnableTFAState((prev) => ({
+      ...prev,
+      loading: true,
+    }));
+
+    const parsedData = enableTFASchema.safeParse({
+      secret: enableTFAState.secret,
+      code: enableTFAState.code,
+      password: enableTFAState.password,
+    });
+
+    if (!parsedData.success) {
+      for (const error of parsedData.error.errors) {
+        message.error(
+          t(`dashboard:settings.modals.enable-tfa.messages.${error.message}`),
+        );
+      }
+      setEnableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+      return;
+    }
+
+    const result = await AuthFeature.authApi.enableTFA({
+      secret: enableTFAState.secret as string,
+      password: enableTFAState.password,
+      tfaCode: enableTFAState.code,
+    });
+
+    if (result.status == "success") {
+      message.success(
+        t("dashboard:settings.modals.enable-tfa.messages.success"),
+      );
+      setEnableTFAState({
+        open: false,
+        loading: false,
+        secret: null,
+        code: "",
+        password: "",
+      });
+    } else if (result.status === "invalid-credentials") {
+      message.error(
+        t("dashboard:settings.modals.enable-tfa.messages.invalid-credentials"),
+      );
+      setEnableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    } else if (result.status === "invalid-tfa-code") {
+      message.error(
+        t("dashboard:settings.modals.enable-tfa.messages.invalid-tfa-code"),
+      );
+      setEnableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    } else {
+      message.error(t(`error-messages:${result.status}`));
+      setEnableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    }
+  };
+
+  const [disableTFAState, setDisableTFAState] = useState<{
+    open: boolean;
+    loading: boolean;
+    code: string;
+    password: string;
+  }>({
+    open: false,
+    loading: false,
+    code: "",
+    password: "",
+  });
+  const disableTFASchema = z.object({
+    code: z.string().min(1, "tfa-code-required"),
+    password: z.string().min(1, "password-required"),
+  });
+  const disableTFA = async () => {
+    setDisableTFAState((prev) => ({
+      ...prev,
+      loading: true,
+    }));
+
+    const parsedData = disableTFASchema.safeParse({
+      code: disableTFAState.code,
+      password: disableTFAState.password,
+    });
+
+    if (!parsedData.success) {
+      for (const error of parsedData.error.errors) {
+        message.error(
+          t(`dashboard:settings.modals.disable-tfa.messages.${error.message}`),
+        );
+      }
+      setDisableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+      return;
+    }
+
+    const result = await AuthFeature.authApi.disableTFA({
+      password: disableTFAState.password,
+      tfaCode: disableTFAState.code,
+    });
+
+    if (result.status == "success") {
+      message.success(
+        t("dashboard:settings.modals.disable-tfa.messages.success"),
+      );
+      setDisableTFAState({
+        open: false,
+        loading: false,
+        code: "",
+        password: "",
+      });
+    } else if (result.status === "invalid-credentials") {
+      message.error(
+        t("dashboard:settings.modals.disable-tfa.messages.invalid-credentials"),
+      );
+      setDisableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    } else if (result.status === "invalid-tfa-code") {
+      message.error(
+        t("dashboard:settings.modals.disable-tfa.messages.invalid-tfa-code"),
+      );
+      setDisableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    } else if (result.status === "tfa-not-enabled") {
+      message.error(
+        t("dashboard:settings.modals.disable-tfa.messages.tfa-not-enabled"),
+      );
+      setDisableTFAState((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    } else {
+      message.error(t(`error-messages:${result.status}`));
+      setDisableTFAState((prev) => ({
         ...prev,
         loading: false,
       }));
@@ -283,6 +458,247 @@ function RouteComponent() {
         </Form>
       </Modal>
 
+      <Modal
+        title={t("dashboard:settings.modals.change-email.title")}
+        open={changeEmailState.open}
+        onCancel={() => {
+          setChangeEmailState((prev) => ({
+            ...prev,
+            open: false,
+            newEmail: "",
+            password: "",
+          }));
+        }}
+        footer={[
+          <Button
+            key="cancel"
+            onClick={() => {
+              setChangeEmailState((prev) => ({
+                ...prev,
+                open: false,
+                newEmail: "",
+                password: "",
+              }));
+            }}
+          >
+            {t("dashboard:common.cancel")}
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={changeEmailState.loading}
+            onClick={changeEmail}
+          >
+            {t("dashboard:common.save")}
+          </Button>,
+        ]}
+      >
+        <Form layout="vertical">
+          <Form.Item
+            label={t("dashboard:settings.modals.change-email.fields.new-email")}
+            required
+          >
+            <Input
+              type="email"
+              value={changeEmailState.newEmail}
+              onChange={(e) =>
+                setChangeEmailState((prev) => ({
+                  ...prev,
+                  newEmail: e.target.value,
+                }))
+              }
+              autoFocus
+            />
+          </Form.Item>
+
+          <Form.Item
+            label={t("dashboard:settings.modals.change-email.fields.password")}
+            required
+          >
+            <Input.Password
+              value={changeEmailState.password}
+              onChange={(e) =>
+                setChangeEmailState((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={t("dashboard:settings.modals.enable-tfa.title")}
+        open={enableTFAState.open}
+        onCancel={() => {
+          setEnableTFAState((prev) => ({
+            ...prev,
+            open: false,
+            secret: null,
+            code: "",
+            password: "",
+          }));
+        }}
+        footer={[
+          <Button
+            key="cancel"
+            onClick={() => {
+              setEnableTFAState((prev) => ({
+                ...prev,
+                open: false,
+                secret: null,
+                code: "",
+                password: "",
+              }));
+            }}
+          >
+            {t("dashboard:common.cancel")}
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={enableTFAState.loading}
+            onClick={enableTFA}
+          >
+            {t("dashboard:common.save")}
+          </Button>,
+        ]}
+      >
+        <Text className="mb-2">
+          {t("dashboard:settings.modals.enable-tfa.description")}
+        </Text>
+
+        <br />
+        <br />
+
+        <Text className="mb-4 mt-2 pt-2">
+          {t("dashboard:settings.modals.enable-tfa.instructions")}
+        </Text>
+        <br />
+        <br />
+
+        <Form layout="vertical">
+          <div className="flex items-center justify-center mb-6 gap-2 flex-col">
+            <QRCode value={enableTFAState.secret || ""} size={256} />
+
+            <Input
+              value={enableTFAState.secret || ""}
+              readOnly
+              className="w-full"
+              placeholder={t(
+                "dashboard:settings.modals.enable-tfa.fields.secret-placeholder",
+              )}
+            />
+          </div>
+
+          <Form.Item
+            label={t("dashboard:settings.modals.enable-tfa.fields.code")}
+            required
+          >
+            <Input
+              value={enableTFAState.code}
+              onChange={(e) =>
+                setEnableTFAState((prev) => ({
+                  ...prev,
+                  code: e.target.value,
+                }))
+              }
+            />
+          </Form.Item>
+
+          <Form.Item
+            label={t("dashboard:settings.modals.enable-tfa.fields.password")}
+            required
+          >
+            <Input.Password
+              value={enableTFAState.password}
+              onChange={(e) =>
+                setEnableTFAState((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={t("dashboard:settings.modals.disable-tfa.title")}
+        open={disableTFAState.open}
+        onCancel={() => {
+          setDisableTFAState((prev) => ({
+            ...prev,
+            open: false,
+            code: "",
+            password: "",
+          }));
+        }}
+        footer={[
+          <Button
+            key="cancel"
+            onClick={() => {
+              setDisableTFAState((prev) => ({
+                ...prev,
+                open: false,
+                code: "",
+                password: "",
+              }));
+            }}
+          >
+            {t("dashboard:common.cancel")}
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={disableTFAState.loading}
+            onClick={disableTFA}
+          >
+            {t("dashboard:common.save")}
+          </Button>,
+        ]}
+      >
+        <Text className="mb-6">
+          {t("dashboard:settings.modals.disable-tfa.description")}
+        </Text>
+
+        <br />
+        <br />
+
+        <Form layout="vertical">
+          <Form.Item
+            label={t("dashboard:settings.modals.disable-tfa.fields.code")}
+            required
+          >
+            <Input
+              value={disableTFAState.code}
+              onChange={(e) =>
+                setDisableTFAState((prev) => ({
+                  ...prev,
+                  code: e.target.value,
+                }))
+              }
+            />
+          </Form.Item>
+
+          <Form.Item
+            label={t("dashboard:settings.modals.disable-tfa.fields.password")}
+            required
+          >
+            <Input.Password
+              value={disableTFAState.password}
+              onChange={(e) =>
+                setDisableTFAState((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+
       <div className="mb-2">
         {t("dashboard:common.loggedInAs", {
           name: account?.profile.name,
@@ -316,6 +732,48 @@ function RouteComponent() {
             >
               {t("dashboard:settings.panels.account.actions.change-email")}
             </Button>
+
+            {account && !account.preferences.security.twoFactorEnabled && (
+              <Button
+                type="primary"
+                onClick={async () => {
+                  const result = await AuthFeature.authApi.generateTFASecret();
+                  if (result.status === "success") {
+                    qrCode.toDataURL(result.secret!, (err) => {
+                      if (err) {
+                        message.error(
+                          t(
+                            "dashboard:settings.panels.account.actions.enable-tfa.messages.qr-error",
+                          ),
+                        );
+                      } else {
+                        setEnableTFAState((prev) => ({
+                          ...prev,
+                          open: true,
+                          secret: result.secret as string,
+                        }));
+                      }
+                    });
+                  } else {
+                    message.error(t(`error-messages:${result.status}`));
+                  }
+                }}
+              >
+                {t("dashboard:settings.panels.account.actions.enable-tfa")}
+              </Button>
+            )}
+
+            {account && account.preferences.security.twoFactorEnabled && (
+              <Button
+                type="primary"
+                danger
+                onClick={() => {
+                  setDisableTFAState((prev) => ({ ...prev, open: true }));
+                }}
+              >
+                {t("dashboard:settings.panels.account.actions.disable-tfa")}
+              </Button>
+            )}
           </Space>
         </Panel>
         <Panel

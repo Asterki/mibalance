@@ -147,7 +147,7 @@ export const authApi = {
 	async generateTFASecret(): Promise<AuthAPITypes.GenerateTFASecretResponseData> {
 		try {
 			const response =
-				await axiosClient.get<AuthAPITypes.GenerateTFASecretResponseData>(
+				await axiosClient.post<AuthAPITypes.GenerateTFASecretResponseData>(
 					"/generate-tfa-secret",
 				);
 			return response.data;
