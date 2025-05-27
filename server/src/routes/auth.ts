@@ -121,7 +121,7 @@ router.post(
     ensureAuthenticated,
     validateRequestBody(
       z.object({
-        currentPassword: z.string().min(8).max(100),
+        currentPassword: z.string(),
         newPassword: z.string().min(8).max(100),
       }),
     ),
@@ -176,7 +176,6 @@ router.post(
     validateRequestBody(
       z.object({
         name: z.string().min(2).max(34).optional(),
-        avatarURL: z.string().nullable().optional(),
       }),
     ),
   ],

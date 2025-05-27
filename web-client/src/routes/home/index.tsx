@@ -43,34 +43,22 @@ function RouteComponent() {
 
   const quickLinks = [
     {
-      title: t("dashboard:links.settingsTitle", "Configuraciones"),
+      title: t("dashboard:sidebar.settings", "Configuraciones"),
       to: "/home/settings",
       icon: <FaCog size="3rem" color="#1890ff" />,
-      buttonLabel: t("dashboard:links.settingsButton", "Administrar"),
+      buttonLabel: t("dashboard:sidebar.settings"),
     },
     {
-      title: t("dashboard:links.profileTitle", "Perfil"),
-      to: "/home/profile",
-      icon: <FaUserCircle size="3rem" color="#1890ff" />,
-      buttonLabel: t("dashboard:links.profileButton", "Ver Perfil"),
-    },
-    {
-      title: t("dashboard:links.walletsTitle", "Billeteras"),
+      title: t("dashboard:sidebar.wallets", "Billeteras"),
       to: "/home/wallets",
       icon: <FaWallet size="3rem" color="#1890ff" />,
-      buttonLabel: t("dashboard:links.walletsButton", "Ver Billeteras"),
+      buttonLabel: t("dashboard:sidebar.wallets"),
     },
     {
-      title: t("dashboard:links.transactionsTitle", "Transacciones"),
+      title: t("dashboard:sidebar.transactions"),
       to: "/home/transactions",
       icon: <FaExchangeAlt size="3rem" color="#1890ff" />,
-      buttonLabel: t("dashboard:links.transactionsButton", "Ver Transacciones"),
-    },
-    {
-      title: t("dashboard:links.budgetsTitle", "Presupuestos"),
-      to: "/home/budgets",
-      icon: <FaFileInvoice size="3rem" color="#1890ff" />,
-      buttonLabel: t("dashboard:links.budgetsButton", "Ver Presupuestos"),
+      buttonLabel: t("dashboard:sidebar.transactions"),
     },
   ];
 

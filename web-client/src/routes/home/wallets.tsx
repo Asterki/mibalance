@@ -213,10 +213,11 @@ function RouteComponent() {
 
     const parsedData = createWalletSchema.safeParse(createWalletState);
     if (!parsedData.success) {
-      const errors = parsedData.error.flatten();
-      for (const field in errors.fieldErrors) {
-        message.warning(t(`dashboard:wallets.modals.create.messages.${field}`));
-      }
+			for (const issue of parsedData.error.issues) {
+				message.warning(
+					t(`dashboard:wallets.modals.create.messages.${issue.message}`),
+				);
+			}
 
       setCreateWalletState((prev) => ({
         ...prev,

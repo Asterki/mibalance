@@ -173,7 +173,6 @@ export interface ChangeEmailResponseData {
 
 export interface UpdateProfileRequestBody {
   name?: string;
-  avatarURL?: string;
 }
 export interface UpdateProfileResponseData {
   status: ResponseStatus;

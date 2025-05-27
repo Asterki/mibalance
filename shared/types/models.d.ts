@@ -21,6 +21,17 @@ export type ISessionAccount = {
     security: {
       twoFactorEnabled: boolean;
     };
+    notifications: {
+      newLogins: boolean;
+      passwordChanges: boolean;
+      walletUpdates: boolean;
+      accountStatusChanges: boolean;
+      emailChanges: boolean;
+      profileChanges: boolean;
+      securityAlerts: boolean;
+      generalUpdates: boolean;
+      marketing: boolean;
+    };
   };
 };
 

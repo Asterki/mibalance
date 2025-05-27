@@ -278,7 +278,7 @@ function RouteComponent() {
   });
 
   const createTransactionSchema = z.object({
-    walletId: z.string({ message: "wallet-id-required" }).min(1),
+    walletId: z.string({ message: "wallet-id-required" }).min(1, "wallet-id-required"),
     type: z.enum(["income", "expense", "transfer"], {
       message: "invalid-transaction-type",
     }),
@@ -286,12 +286,14 @@ function RouteComponent() {
       .number({ message: "invalid-amount" })
       .min(0, { message: "invalid-amount" }),
     currency: z.string({ message: "invalid-currency" }).trim().min(3).max(5),
-    category: z.string({ message: "invalid-category" }).trim().min(1).max(100),
+    category: z
+      .string({ message: "invalid-category" })
+      .trim()
+      .min(1, "invalid-category"),
     subcategory: z
       .string({ message: "invalid-subcategory" })
       .trim()
-      .min(1)
-      .max(100)
+      .min(1, "invalid-subcategory")
       .optional(),
     date: z.string({ message: "invalid-date" }).datetime(),
     description: z
@@ -343,10 +345,9 @@ function RouteComponent() {
     );
 
     if (!parsedData.success) {
-      const errors = parsedData.error.flatten();
-      for (const field in errors.fieldErrors) {
+      for (const issue of parsedData.error.issues) {
         message.warning(
-          t(`dashboard:transactions.modals.create.messages.${field}`),
+          t(`dashboard:transactions.modals.create.messages.${issue.message}`),
         );
       }
 

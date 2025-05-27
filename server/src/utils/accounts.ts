@@ -33,6 +33,7 @@ const createSessionAccount = async (
       security: {
         twoFactorEnabled: account.preferences.security.tfaSecret !== null,
       },
+      notifications: account.preferences.notifications, // Include all notifications preferences
     },
   };
 };

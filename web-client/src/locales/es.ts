@@ -205,6 +205,12 @@ const translation = {
       settings: "Configuraciones",
     },
 
+    greetings: {
+      morning: "Buenos días",
+      afternoon: "Buenas tardes",
+      evening: "Buenas noches",
+    },
+
     common: {
       loggedInAs: "Actualmente ha iniciado sesión como {{name}} ({{email}})",
       create: "Crear",
@@ -227,6 +233,8 @@ const translation = {
       noResults: "Sin resultados",
       yes: "Sí",
       no: "No",
+      on: "Activado",
+      off: "Desactivado",
       loadMore: "Cargar más",
       description: "Descripción",
       name: "Nombre",
@@ -804,15 +812,71 @@ const translation = {
         account: {
           title: "Cuenta",
           actions: {
+            "change-name": "Cambiar nombre",
             "change-password": "Cambiar contraseña",
             "change-email": "Cambiar correo electrónico",
             "enable-tfa": "Habilitar autenticación de dos factores (TFA)",
             "disable-tfa": "Deshabilitar autenticación de dos factores (TFA)",
           },
         },
+        preferences: {
+          title: "Preferencias",
+          description: "Administra tus preferencias de idioma y tema.",
+          fields: {
+            theme: "Tema",
+            language: "Idioma",
+            notificationsLabel: "Notificaciones",
+            notifications: {
+              options: {
+                "new-logins": "Nuevos inicios de sesión",
+                "password-changes": "Cambios de contraseña",
+                "wallet-updates": "Actualizaciones de la billetera",
+                "account-status-changes": "Cambios en el estado de la cuenta",
+                "email-changes": "Cambios de correo electrónico",
+                "profile-changes": "Cambios en el perfil",
+                "security-alerts": "Alertas de seguridad",
+                "general-updates": "Actualizaciones generales",
+                marketing: "Comunicaciones de marketing",
+              },
+            },
+          },
+          options: {
+            light: "Claro",
+            dark: "Oscuro",
+            en: "Inglés 🇺🇸",
+            es: "Español 🇪🇸",
+            fr: "Francés 🇫🇷",
+            de: "Alemán 🇩🇪",
+            zh: "Chino 🇨🇳",
+            ja: "Japonés 🇯🇵",
+            ru: "Ruso 🇷🇺",
+            ar: "Árabe 🇸🇦",
+            pt: "Portugués 🇵🇹",
+            it: "Italiano 🇮🇹",
+            hi: "Hindi 🇮🇳",
+            ko: "Coreano 🇰🇷",
+          },
+
+          messages: {
+            success: "Preferencias actualizadas con éxito",
+            error: "Error al actualizar las preferencias",
+          },
+        },
       },
 
       modals: {
+        "change-name": {
+          title: "Cambiar nombre",
+          fields: {
+            "new-name": "Nuevo nombre",
+          },
+          messages: {
+            success: "Nombre cambiado con éxito",
+            error: "Error al cambiar el nombre",
+            "name-too-short": "El nombre debe tener al menos 2 caracteres",
+            "name-too-long": "El nombre no puede exceder los 100 caracteres",
+          },
+        },
         "change-email": {
           title: "Cambiar correo electrónico",
           fields: {
@@ -822,6 +886,12 @@ const translation = {
           messages: {
             success: "Correo electrónico cambiado con éxito",
             error: "Error al cambiar el correo electrónico",
+            "invalid-email": "El nuevo correo electrónico no es válido",
+            "email-already-used": "El nuevo correo electrónico ya está en uso",
+            "password-required": "La contraseña actual es obligatoria",
+            "invalid-credentials":
+              "Las credenciales proporcionadas son inválidas",
+            "new-email-required": "El nuevo correo electrónico es obligatorio",
           },
         },
         "change-password": {
@@ -836,9 +906,16 @@ const translation = {
             error: "Error al cambiar la contraseña",
             "passwords-not-match": "Las contraseñas no coinciden",
             "current-password-required": "La contraseña actual es obligatoria",
-            "new-password-required": "La nueva contraseña es obligatoria",
+            "new-password-required":
+              "La nueva contraseña tiene que ser mínimo de 8 caracteres",
+            "new-password-max-length":
+              "La nueva contraseña no puede exceder los 100 caracteres",
             "confirm-new-password-required":
-              "La confirmación de la nueva contraseña es obligatoria",
+              "La confirmación de la nueva contraseña tiene que ser mínimo de 8 caracteres",
+            "confirm-new-password-max-length":
+              "La confirmación de la nueva contraseña no puede exceder los 100 caracteres",
+            "passwords-do-not-match":
+              "Las contraseñas no coinciden, por favor verifica que las hayas escrito correctamente",
           },
         },
         "enable-tfa": {
@@ -853,6 +930,9 @@ const translation = {
           },
           messages: {
             success: "Autenticación de dos factores habilitada con éxito",
+            "password-required":
+              "La contraseña actual es obligatoria para habilitar la autenticación de dos factores",
+            "tfa-code-required": "El código de autenticación es obligatorio",
             "invalid-credentials":
               "La contraseña que proporcionaste no es correcta",
             "invalid-tfa-code":

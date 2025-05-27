@@ -12,7 +12,7 @@ const handler = async (
   _next: NextFunction,
 ) => {
   const account = req.user as IAccount;
-  const { name, avatarURL } = req.body;
+  const { name } = req.body;
 
   try {
     const dbAccount = await AccountModel.findOne({
@@ -24,9 +24,6 @@ const handler = async (
 
     if (name) {
       dbAccount!.profile.name = name;
-    }
-    if (avatarURL) {
-      dbAccount!.profile.avatarUrl = avatarURL;
     }
 
     await dbAccount!.save();

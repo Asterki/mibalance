@@ -11,13 +11,11 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ProfileImport } from './routes/profile'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as HomeWalletsImport } from './routes/home/wallets'
 import { Route as HomeTransactionsImport } from './routes/home/transactions'
 import { Route as HomeSettingsImport } from './routes/home/settings'
-import { Route as HomeProfileImport } from './routes/home/profile'
 import { Route as HomeBudgetsImport } from './routes/home/budgets'
 import { Route as ErrorsOfflineImport } from './routes/errors/offline'
 import { Route as Errors404Import } from './routes/errors/404'
@@ -30,12 +28,6 @@ import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AuthForgotPasswordImport } from './routes/auth/forgot-password'
 
 // Create/Update Routes
-
-const ProfileRoute = ProfileImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -64,12 +56,6 @@ const HomeTransactionsRoute = HomeTransactionsImport.update({
 const HomeSettingsRoute = HomeSettingsImport.update({
   id: '/home/settings',
   path: '/home/settings',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HomeProfileRoute = HomeProfileImport.update({
-  id: '/home/profile',
-  path: '/home/profile',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -144,13 +130,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileImport
-      parentRoute: typeof rootRoute
-    }
     '/auth/forgot-password': {
       id: '/auth/forgot-password'
       path: '/auth/forgot-password'
@@ -221,13 +200,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeBudgetsImport
       parentRoute: typeof rootRoute
     }
-    '/home/profile': {
-      id: '/home/profile'
-      path: '/home/profile'
-      fullPath: '/home/profile'
-      preLoaderRoute: typeof HomeProfileImport
-      parentRoute: typeof rootRoute
-    }
     '/home/settings': {
       id: '/home/settings'
       path: '/home/settings'
@@ -263,7 +235,6 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
@@ -274,7 +245,6 @@ export interface FileRoutesByFullPath {
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
   '/home/budgets': typeof HomeBudgetsRoute
-  '/home/profile': typeof HomeProfileRoute
   '/home/settings': typeof HomeSettingsRoute
   '/home/transactions': typeof HomeTransactionsRoute
   '/home/wallets': typeof HomeWalletsRoute
@@ -283,7 +253,6 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
@@ -294,7 +263,6 @@ export interface FileRoutesByTo {
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
   '/home/budgets': typeof HomeBudgetsRoute
-  '/home/profile': typeof HomeProfileRoute
   '/home/settings': typeof HomeSettingsRoute
   '/home/transactions': typeof HomeTransactionsRoute
   '/home/wallets': typeof HomeWalletsRoute
@@ -304,7 +272,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
@@ -315,7 +282,6 @@ export interface FileRoutesById {
   '/errors/404': typeof Errors404Route
   '/errors/offline': typeof ErrorsOfflineRoute
   '/home/budgets': typeof HomeBudgetsRoute
-  '/home/profile': typeof HomeProfileRoute
   '/home/settings': typeof HomeSettingsRoute
   '/home/transactions': typeof HomeTransactionsRoute
   '/home/wallets': typeof HomeWalletsRoute
@@ -326,7 +292,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/profile'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
@@ -337,7 +302,6 @@ export interface FileRouteTypes {
     | '/errors/404'
     | '/errors/offline'
     | '/home/budgets'
-    | '/home/profile'
     | '/home/settings'
     | '/home/transactions'
     | '/home/wallets'
@@ -345,7 +309,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/profile'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
@@ -356,7 +319,6 @@ export interface FileRouteTypes {
     | '/errors/404'
     | '/errors/offline'
     | '/home/budgets'
-    | '/home/profile'
     | '/home/settings'
     | '/home/transactions'
     | '/home/wallets'
@@ -364,7 +326,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/profile'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/logout'
@@ -375,7 +336,6 @@ export interface FileRouteTypes {
     | '/errors/404'
     | '/errors/offline'
     | '/home/budgets'
-    | '/home/profile'
     | '/home/settings'
     | '/home/transactions'
     | '/home/wallets'
@@ -385,7 +345,6 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProfileRoute: typeof ProfileRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthLogoutRoute: typeof AuthLogoutRoute
@@ -396,7 +355,6 @@ export interface RootRouteChildren {
   Errors404Route: typeof Errors404Route
   ErrorsOfflineRoute: typeof ErrorsOfflineRoute
   HomeBudgetsRoute: typeof HomeBudgetsRoute
-  HomeProfileRoute: typeof HomeProfileRoute
   HomeSettingsRoute: typeof HomeSettingsRoute
   HomeTransactionsRoute: typeof HomeTransactionsRoute
   HomeWalletsRoute: typeof HomeWalletsRoute
@@ -405,7 +363,6 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProfileRoute: ProfileRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthLogoutRoute: AuthLogoutRoute,
@@ -416,7 +373,6 @@ const rootRouteChildren: RootRouteChildren = {
   Errors404Route: Errors404Route,
   ErrorsOfflineRoute: ErrorsOfflineRoute,
   HomeBudgetsRoute: HomeBudgetsRoute,
-  HomeProfileRoute: HomeProfileRoute,
   HomeSettingsRoute: HomeSettingsRoute,
   HomeTransactionsRoute: HomeTransactionsRoute,
   HomeWalletsRoute: HomeWalletsRoute,
@@ -434,7 +390,6 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/profile",
         "/auth/forgot-password",
         "/auth/login",
         "/auth/logout",
@@ -445,7 +400,6 @@ export const routeTree = rootRoute
         "/errors/404",
         "/errors/offline",
         "/home/budgets",
-        "/home/profile",
         "/home/settings",
         "/home/transactions",
         "/home/wallets",
@@ -454,9 +408,6 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/profile": {
-      "filePath": "profile.tsx"
     },
     "/auth/forgot-password": {
       "filePath": "auth/forgot-password.tsx"
@@ -487,9 +438,6 @@ export const routeTree = rootRoute
     },
     "/home/budgets": {
       "filePath": "home/budgets.tsx"
-    },
-    "/home/profile": {
-      "filePath": "home/profile.tsx"
     },
     "/home/settings": {
       "filePath": "home/settings.tsx"

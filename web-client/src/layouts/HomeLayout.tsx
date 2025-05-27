@@ -7,10 +7,20 @@ import {
   FaExchangeAlt,
   FaCog,
   FaWallet,
-  FaUserCircle,
 } from "react-icons/fa";
+
 import { ConfigProvider, Layout, Menu, Drawer, Button, theme } from "antd";
+
+// Import antd locales
 import esES from "antd/locale/es_ES";
+import deDE from "antd/locale/de_DE";
+import enUS from "antd/locale/en_US";
+import frFR from "antd/locale/fr_FR";
+import zhCN from "antd/locale/zh_CN";
+import itIT from "antd/locale/it_IT";
+import ptBR from "antd/locale/pt_BR";
+import ruRU from "antd/locale/ru_RU";
+import koKR from "antd/locale/ko_KR";
 
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
@@ -29,7 +39,7 @@ interface LayoutProps {
 export default function PageLayout({ children, selectedPage }: LayoutProps) {
   const navigate = useNavigate();
   const dispatch = useDispatch<typeof import("../store").store.dispatch>();
-  const { t } = useTranslation(["main"]);
+  const { t, i18n } = useTranslation(["main"]);
   const { account } = useSelector((state: RootState) => state.auth);
 
   const [collapsed, setCollapsed] = useState(false);
@@ -52,6 +62,12 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
           navigate({ to: "/auth/login" });
         }
       })();
+    } else {
+      // Set the language based on the account preferences
+      const language = account.preferences.general.language || "en";
+      if (i18n.language !== language) {
+        i18n.changeLanguage(language);
+      }
     }
   }, [account]);
 
@@ -67,11 +83,6 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
       icon: <FaWallet />,
     },
     {
-      key: "budgets",
-      label: <Link to="/home/budgets">{t("dashboard:sidebar.budgets")}</Link>,
-      icon: <FaFileInvoice />,
-    },
-    {
       key: "transactions",
       label: (
         <Link to="/home/transactions">
@@ -79,11 +90,6 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
         </Link>
       ),
       icon: <FaExchangeAlt />,
-    },
-    {
-      key: "profile",
-      label: <Link to="/home/profile">{t("dashboard:sidebar.profile")}</Link>,
-      icon: <FaUserCircle />,
     },
     {
       key: "settings",
@@ -96,7 +102,30 @@ export default function PageLayout({ children, selectedPage }: LayoutProps) {
 
   return (
     <ConfigProvider
-      locale={esES}
+      locale={(() => {
+        switch (account?.preferences.general.language) {
+          case "es":
+            return esES;
+          case "de":
+            return deDE;
+          case "en":
+            return enUS;
+          case "fr":
+            return frFR;
+          case "zh":
+            return zhCN;
+          case "it":
+            return itIT;
+          case "pt":
+            return ptBR;
+          case "ru":
+            return ruRU;
+          case "ko":
+            return koKR;
+          default:
+            return enUS;
+        }
+      })()}
       theme={{ algorithm: isDark ? theme.darkAlgorithm : undefined }}
     >
       <Layout className={`${isDark ? "dark" : ""} min-h-screen`}>
