@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
   FaBars,
-  FaFileInvoice,
   FaHome,
   FaExchangeAlt,
   FaCog,

@@ -77,7 +77,6 @@ function ForgotPasswordPage() {
             name="email"
           >
             <Input
-              ref={emailRef}
               type="email"
               autoComplete="email"
               placeholder={t("forgotPassword.fields.emailPlaceholder")}

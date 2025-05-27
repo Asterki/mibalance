@@ -22,7 +22,7 @@ function RouteComponent() {
   const navigate = useNavigate();
   const { t } = useTranslation(["accounts", "error-messages"]);
   const dispatch = useDispatch<AppDispatch>();
-  const { error, account } = useSelector((state: RootState) => state.auth);
+  const { account } = useSelector((state: RootState) => state.auth);
 
   const [loginState, setLoginState] = useState({
     loading: false,

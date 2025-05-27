@@ -22,7 +22,7 @@ function OfflinePage() {
 
 		if (data.status !== "network-error") {
 			// If fetch succeeded, just navigate
-			navigate({ to: "/dashboard" });
+			navigate({ to: "/home" });
 		} else {
 			// If fetch failed, show error message
 			message.error(t("error-messages:network-error"));

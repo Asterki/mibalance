@@ -21,11 +21,9 @@ import {
   App,
   Collapse,
   Modal,
-  Tag,
-  InputNumber,
   Space,
 } from "antd";
-import { FaCog, FaTrash } from "react-icons/fa";
+import { FaCog } from "react-icons/fa";
 const { Text, Title } = Typography;
 const { Panel } = Collapse;
 

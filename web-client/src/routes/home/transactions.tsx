@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 
 import HomeLayout from "../../layouts/HomeLayout";
-import { FaExchangeAlt, FaSearch, FaTrash, FaPencilAlt } from "react-icons/fa";
+import { FaExchangeAlt, FaTrash, FaPencilAlt } from "react-icons/fa";
 
 import {
   Button,

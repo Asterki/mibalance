@@ -79,7 +79,7 @@ function RouteComponent() {
 								variant="solid"
 								onClick={() => {
 									navigate({
-										to: "/dashboard",
+										to: "/home",
 									});
 								}}
 							>

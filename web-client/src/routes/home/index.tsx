@@ -6,10 +6,8 @@ import { useTranslation } from "react-i18next";
 import { Layout, Card, Row, Col, Typography, Button } from "antd";
 import {
   FaCog,
-  FaUserCircle,
   FaWallet,
   FaExchangeAlt,
-  FaFileInvoice,
 } from "react-icons/fa";
 
 import type { RootState } from "../../store";
